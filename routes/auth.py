@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends, FastAPI
 from bson import ObjectId
 from models.model import Auth
 from config.database import collection_auth
@@ -6,7 +6,11 @@ from schema.auth import list_auth, auth_seriral
 from passlib.hash import pbkdf2_sha256
 from jose import jwt
 from datetime import datetime, timedelta
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import smtplib, ssl
+import smtplib
 router_auth = APIRouter()
 
 #register
@@ -22,6 +26,7 @@ async def register(auth:Auth):
         "name": auth.name,
         "email": auth.email,
         "password": hash_password,
+        "password_reset_token": auth.password_reset_token,
         "role": auth.role
     }
     
@@ -74,3 +79,39 @@ async def edit_auth(id: str, auth:Auth):
 async def delete_auth(id:str):
     collection_auth.find_one_and_delete({"_id": ObjectId(id)})
     return {"message": "OK"} 
+
+# forgot password
+
+def get_user_by_password_reset_token(token: str):
+    # for user in collection_auth:
+    #     if user.password_reset_token == token:
+    #         return user
+    # return None
+    
+    #Biểu thức sinh đánh giá(generator expression) + hàm next()
+    try:
+        return next(user for user in collection_auth if user.password_reset_token == token)
+    except StopIteration:
+        return None
+
+@router_auth.post("/auth/email")
+async def forgot_password():
+    subject = "Hi there"  
+    port = 465  # For SSL
+    smtp_server = "smtp.gmail.com"
+    sender_email = "hiepphdemo@gmail.com"  
+    receiver_email = "phanhuyhiep2k3@gmail.com"  
+    password = "bjcluvuycapnugei"
+
+    message = MIMEMultipart()
+    message["From"] = sender_email
+    message["To"] = receiver_email
+    message["Subject"] = subject
+
+    body = "This message is sent from Python."
+    message.attach(MIMEText(body, "plain"))
+
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+        server.login(sender_email, password)
+        server.sendmail(sender_email, receiver_email, message.as_string())

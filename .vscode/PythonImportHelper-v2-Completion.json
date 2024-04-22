@@ -32,6 +32,15 @@
         "documentation": {}
     },
     {
+        "label": "secrets",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "secrets",
+        "description": "secrets",
+        "detail": "secrets",
+        "documentation": {}
+    },
+    {
         "label": "APIRouter",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -41,6 +50,22 @@
     },
     {
         "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Depends",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "FastAPI",
         "importPath": "fastapi",
         "description": "fastapi",
         "isExtraImport": true,
@@ -200,6 +225,48 @@
         "documentation": {}
     },
     {
+        "label": "OAuth2PasswordRequestForm",
+        "importPath": "fastapi.security",
+        "description": "fastapi.security",
+        "isExtraImport": true,
+        "detail": "fastapi.security",
+        "documentation": {}
+    },
+    {
+        "label": "MIMEText",
+        "importPath": "email.mime.text",
+        "description": "email.mime.text",
+        "isExtraImport": true,
+        "detail": "email.mime.text",
+        "documentation": {}
+    },
+    {
+        "label": "MIMEMultipart",
+        "importPath": "email.mime.multipart",
+        "description": "email.mime.multipart",
+        "isExtraImport": true,
+        "detail": "email.mime.multipart",
+        "documentation": {}
+    },
+    {
+        "label": "smtplib,",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "smtplib.",
+        "description": "smtplib.",
+        "detail": "smtplib.",
+        "documentation": {}
+    },
+    {
+        "label": "smtplib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "smtplib",
+        "description": "smtplib",
+        "detail": "smtplib",
+        "documentation": {}
+    },
+    {
         "label": "list_category",
         "importPath": "schema.category",
         "description": "schema.category",
@@ -323,7 +390,7 @@
         "kind": 6,
         "importPath": "models.model",
         "description": "models.model",
-        "peekOfCode": "class Auth(BaseModel):\n    name: Optional[str] = None\n    email: str\n    password: str\n    role: str = Field(default=\"USER\")",
+        "peekOfCode": "class Auth(BaseModel):\n    name: Optional[str] = None\n    email: str\n    password: str\n    password_reset_token: str = Field(default_factory=lambda: secrets.token_hex(16))\n    role: str = Field(default=\"USER\")",
         "detail": "models.model",
         "documentation": {}
     },
@@ -333,6 +400,15 @@
         "importPath": "routes.auth",
         "description": "routes.auth",
         "peekOfCode": "def create_access_token(auth_id: str):\n    access_token = jwt.encode(\n        claims = {\n            \"id\": auth_id,\n            \"exp\": datetime.utcnow() + timedelta(minutes=30),\n        },\n        key = \"be-page\",\n        algorithm=\"HS256\",\n    )\n    return access_token",
+        "detail": "routes.auth",
+        "documentation": {}
+    },
+    {
+        "label": "get_user_by_password_reset_token",
+        "kind": 2,
+        "importPath": "routes.auth",
+        "description": "routes.auth",
+        "peekOfCode": "def get_user_by_password_reset_token(token: str):\n    # for user in collection_auth:\n    #     if user.password_reset_token == token:\n    #         return user\n    # return None\n    #Biểu thức sinh đánh giá(generator expression) + hàm next()\n    try:\n        return next(user for user in collection_auth if user.password_reset_token == token)\n    except StopIteration:\n        return None",
         "detail": "routes.auth",
         "documentation": {}
     },
@@ -377,7 +453,7 @@
         "kind": 2,
         "importPath": "schema.auth",
         "description": "schema.auth",
-        "peekOfCode": "def auth_seriral(auth) -> dict:\n    return {\n        \"id\": str(auth[\"_id\"]),\n        \"name\": auth[\"name\"],\n        \"email\": auth[\"email\"],\n        \"password\": auth[\"password\"],\n        \"role\": auth[\"role\"]\n    }\ndef list_auth(auths) -> list:\n    return [auth_seriral(auth) for auth in auths]",
+        "peekOfCode": "def auth_seriral(auth) -> dict:\n    return {\n        \"id\": str(auth[\"_id\"]),\n        \"name\": auth[\"name\"],\n        \"email\": auth[\"email\"],\n        \"password\": auth[\"password\"],\n        \"password_reset_token\": str(auth[\"password_reset_token\"]),\n        \"role\": auth[\"role\"],\n    }\ndef list_auth(auths) -> list:",
         "detail": "schema.auth",
         "documentation": {}
     },

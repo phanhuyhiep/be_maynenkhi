@@ -4,7 +4,8 @@ def auth_seriral(auth) -> dict:
         "name": auth["name"],
         "email": auth["email"],
         "password": auth["password"],
-        "role": auth["role"]
+        "password_reset_token": str(auth["password_reset_token"]),
+        "role": auth["role"],
     }
 
 def list_auth(auths) -> list:
