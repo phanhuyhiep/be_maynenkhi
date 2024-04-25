@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-
 from routes.category import router_category
 from routes.product import router_product
 from routes.auth import router_auth

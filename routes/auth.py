@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Depends, FastAPI
+from fastapi import APIRouter, HTTPException
 from bson import ObjectId
 from models.model import Auth
 from config.database import collection_auth
@@ -6,7 +6,7 @@ from schema.auth import list_auth, auth_seriral
 from passlib.hash import pbkdf2_sha256
 from jose import jwt
 from datetime import datetime, timedelta
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordBearer
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import smtplib, ssl
@@ -40,7 +40,7 @@ async def login(auth:Auth):
     check_user = collection_auth.find_one({"email": auth.email})
     if not check_user:
         raise HTTPException(status_code=401, detail="Tài khoản không tồn tại")
-    #verify password
+    
     hashed_password = check_user["password"]
     if not pbkdf2_sha256.verify(auth.password, hashed_password):
         raise HTTPException(status_code=401, detail="Sai password")
@@ -80,38 +80,29 @@ async def delete_auth(id:str):
     collection_auth.find_one_and_delete({"_id": ObjectId(id)})
     return {"message": "OK"} 
 
-# forgot password
+# reset password
 
-def get_user_by_password_reset_token(token: str):
-    # for user in collection_auth:
-    #     if user.password_reset_token == token:
-    #         return user
-    # return None
-    
-    #Biểu thức sinh đánh giá(generator expression) + hàm next()
-    try:
-        return next(user for user in collection_auth if user.password_reset_token == token)
-    except StopIteration:
-        return None
-
-@router_auth.post("/auth/email")
-async def forgot_password():
-    subject = "Hi there"  
-    port = 465  # For SSL
-    smtp_server = "smtp.gmail.com"
-    sender_email = "hiepphdemo@gmail.com"  
-    receiver_email = "phanhuyhiep2k3@gmail.com"  
-    password = "bjcluvuycapnugei"
-
-    message = MIMEMultipart()
-    message["From"] = sender_email
-    message["To"] = receiver_email
-    message["Subject"] = subject
-
-    body = "This message is sent from Python."
-    message.attach(MIMEText(body, "plain"))
-
-    context = ssl.create_default_context()
-    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
-        server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, message.as_string())
+@router_auth.post("/auth/forgot_password")
+async def forgot_password(email:str):
+    check_email = collection_auth.find_one({"email": email})
+    url = "http://127.0.0.1:5500"
+    if check_email:
+        subject = "Hiepph - Reset Password"  
+        port = 465  # For SSL
+        smtp_server = "smtp.gmail.com"
+        sender_email = "hiepphdemo@gmail.com"
+        receiver_email = email  
+        password = "bjcluvuycapnugei"
+        message = MIMEMultipart()
+        message["From"] = sender_email
+        message["To"] = receiver_email
+        message["Subject"] = subject
+        body = f"Click the link to reset your password: {url}/teamplate/reset_password.html"
+        message.attach(MIMEText(body, "plain"))
+        context = ssl.create_default_context()
+        with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+            server.login(sender_email, password)
+            server.sendmail(sender_email, receiver_email, message.as_string())
+        return {"message": "OK"}
+    else: 
+        return {"message": "Email không tồn tại trọng hệ thống" }

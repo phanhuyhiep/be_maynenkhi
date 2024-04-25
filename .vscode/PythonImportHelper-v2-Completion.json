@@ -57,22 +57,6 @@
         "documentation": {}
     },
     {
-        "label": "Depends",
-        "importPath": "fastapi",
-        "description": "fastapi",
-        "isExtraImport": true,
-        "detail": "fastapi",
-        "documentation": {}
-    },
-    {
-        "label": "FastAPI",
-        "importPath": "fastapi",
-        "description": "fastapi",
-        "isExtraImport": true,
-        "detail": "fastapi",
-        "documentation": {}
-    },
-    {
         "label": "APIRouter",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -218,14 +202,6 @@
     },
     {
         "label": "OAuth2PasswordBearer",
-        "importPath": "fastapi.security",
-        "description": "fastapi.security",
-        "isExtraImport": true,
-        "detail": "fastapi.security",
-        "documentation": {}
-    },
-    {
-        "label": "OAuth2PasswordRequestForm",
         "importPath": "fastapi.security",
         "description": "fastapi.security",
         "isExtraImport": true,
@@ -404,15 +380,6 @@
         "documentation": {}
     },
     {
-        "label": "get_user_by_password_reset_token",
-        "kind": 2,
-        "importPath": "routes.auth",
-        "description": "routes.auth",
-        "peekOfCode": "def get_user_by_password_reset_token(token: str):\n    # for user in collection_auth:\n    #     if user.password_reset_token == token:\n    #         return user\n    # return None\n    #Biểu thức sinh đánh giá(generator expression) + hàm next()\n    try:\n        return next(user for user in collection_auth if user.password_reset_token == token)\n    except StopIteration:\n        return None",
-        "detail": "routes.auth",
-        "documentation": {}
-    },
-    {
         "label": "router_auth",
         "kind": 5,
         "importPath": "routes.auth",
@@ -426,7 +393,7 @@
         "kind": 5,
         "importPath": "routes.auth",
         "description": "routes.auth",
-        "peekOfCode": "oauth2_scheme = OAuth2PasswordBearer(tokenUrl=\"auth/login\")\n@router_auth.post(\"/auth/login\")\nasync def login(auth:Auth):\n    check_user = collection_auth.find_one({\"email\": auth.email})\n    if not check_user:\n        raise HTTPException(status_code=401, detail=\"Tài khoản không tồn tại\")\n    #verify password\n    hashed_password = check_user[\"password\"]\n    if not pbkdf2_sha256.verify(auth.password, hashed_password):\n        raise HTTPException(status_code=401, detail=\"Sai password\")",
+        "peekOfCode": "oauth2_scheme = OAuth2PasswordBearer(tokenUrl=\"auth/login\")\n@router_auth.post(\"/auth/login\")\nasync def login(auth:Auth):\n    check_user = collection_auth.find_one({\"email\": auth.email})\n    if not check_user:\n        raise HTTPException(status_code=401, detail=\"Tài khoản không tồn tại\")\n    hashed_password = check_user[\"password\"]\n    if not pbkdf2_sha256.verify(auth.password, hashed_password):\n        raise HTTPException(status_code=401, detail=\"Sai password\")\n    token = create_access_token(str(check_user[\"_id\"]))",
         "detail": "routes.auth",
         "documentation": {}
     },

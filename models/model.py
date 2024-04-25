@@ -1,7 +1,7 @@
 from typing import Optional
 from pydantic import BaseModel, Field
 import secrets
-# from bson import ObjectId
+
 class Category(BaseModel):
     name: str
     
