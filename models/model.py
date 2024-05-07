@@ -19,3 +19,10 @@ class Auth(BaseModel):
     password: str
     password_reset_token: str = Field(default_factory=lambda: secrets.token_hex(16))
     role: str = Field(default="USER")
+
+class CartItem(BaseModel):
+    user: int
+    product_cart: list[Product] = []
+    quantity: int
+    
+    

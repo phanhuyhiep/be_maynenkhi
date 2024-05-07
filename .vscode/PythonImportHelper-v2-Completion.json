@@ -243,6 +243,24 @@
         "documentation": {}
     },
     {
+        "label": "random",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "string",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "string",
+        "description": "string",
+        "detail": "string",
+        "documentation": {}
+    },
+    {
         "label": "list_category",
         "importPath": "schema.category",
         "description": "schema.category",
@@ -303,7 +321,7 @@
         "kind": 5,
         "importPath": "config.database",
         "description": "config.database",
-        "peekOfCode": "client = MongoClient(\"mongodb+srv://hiepph:hiep2003@cluster0.owfcn5g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0\")\ndb = client.page_db \ncollection_category = db[\"Category\"]\ncollection_product = db[\"Product\"]\ncollection_auth = db[\"Auth\"]",
+        "peekOfCode": "client = MongoClient(\"mongodb+srv://hiepph:hiep2003@cluster0.owfcn5g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0\")\ndb = client.page_db \ncollection_category = db[\"Category\"]\ncollection_product = db[\"Product\"]\ncollection_auth = db[\"Auth\"]\ncollection_auth = db[\"Cart\"]",
         "detail": "config.database",
         "documentation": {}
     },
@@ -312,7 +330,7 @@
         "kind": 5,
         "importPath": "config.database",
         "description": "config.database",
-        "peekOfCode": "db = client.page_db \ncollection_category = db[\"Category\"]\ncollection_product = db[\"Product\"]\ncollection_auth = db[\"Auth\"]",
+        "peekOfCode": "db = client.page_db \ncollection_category = db[\"Category\"]\ncollection_product = db[\"Product\"]\ncollection_auth = db[\"Auth\"]\ncollection_auth = db[\"Cart\"]",
         "detail": "config.database",
         "documentation": {}
     },
@@ -321,7 +339,7 @@
         "kind": 5,
         "importPath": "config.database",
         "description": "config.database",
-        "peekOfCode": "collection_category = db[\"Category\"]\ncollection_product = db[\"Product\"]\ncollection_auth = db[\"Auth\"]",
+        "peekOfCode": "collection_category = db[\"Category\"]\ncollection_product = db[\"Product\"]\ncollection_auth = db[\"Auth\"]\ncollection_auth = db[\"Cart\"]",
         "detail": "config.database",
         "documentation": {}
     },
@@ -330,7 +348,7 @@
         "kind": 5,
         "importPath": "config.database",
         "description": "config.database",
-        "peekOfCode": "collection_product = db[\"Product\"]\ncollection_auth = db[\"Auth\"]",
+        "peekOfCode": "collection_product = db[\"Product\"]\ncollection_auth = db[\"Auth\"]\ncollection_auth = db[\"Cart\"]",
         "detail": "config.database",
         "documentation": {}
     },
@@ -339,7 +357,16 @@
         "kind": 5,
         "importPath": "config.database",
         "description": "config.database",
-        "peekOfCode": "collection_auth = db[\"Auth\"]",
+        "peekOfCode": "collection_auth = db[\"Auth\"]\ncollection_auth = db[\"Cart\"]",
+        "detail": "config.database",
+        "documentation": {}
+    },
+    {
+        "label": "collection_auth",
+        "kind": 5,
+        "importPath": "config.database",
+        "description": "config.database",
+        "peekOfCode": "collection_auth = db[\"Cart\"]",
         "detail": "config.database",
         "documentation": {}
     },
@@ -366,7 +393,16 @@
         "kind": 6,
         "importPath": "models.model",
         "description": "models.model",
-        "peekOfCode": "class Auth(BaseModel):\n    name: Optional[str] = None\n    email: str\n    password: str\n    password_reset_token: str = Field(default_factory=lambda: secrets.token_hex(16))\n    role: str = Field(default=\"USER\")",
+        "peekOfCode": "class Auth(BaseModel):\n    name: Optional[str] = None\n    email: str\n    password: str\n    password_reset_token: str = Field(default_factory=lambda: secrets.token_hex(16))\n    role: str = Field(default=\"USER\")\nclass CartItem(BaseModel):\n    user: int\n    product_cart: list[Product] = []\n    quantity: int",
+        "detail": "models.model",
+        "documentation": {}
+    },
+    {
+        "label": "CartItem",
+        "kind": 6,
+        "importPath": "models.model",
+        "description": "models.model",
+        "peekOfCode": "class CartItem(BaseModel):\n    user: int\n    product_cart: list[Product] = []\n    quantity: int",
         "detail": "models.model",
         "documentation": {}
     },
@@ -402,7 +438,7 @@
         "kind": 5,
         "importPath": "routes.category",
         "description": "routes.category",
-        "peekOfCode": "router_category = APIRouter()\n#get \n@router_category.get(\"/category/\")\nasync def get_category():\n    category = list_category(collection_category.find())\n    return category\n@router_category.get(\"/category/{id}\")\nasync def get_one_category(id:str):\n    category = category_serial(collection_category.find_one({\"_id\": ObjectId(id)}))\n    return category",
+        "peekOfCode": "router_category = APIRouter()\n@router_category.get(\"/category/\")\nasync def get_category():\n    category = list_category(collection_category.find())\n    return category\n@router_category.get(\"/category/{id}\")\nasync def get_one_category(id:str):\n    category = category_serial(collection_category.find_one({\"_id\": ObjectId(id)}))\n    return category\n@router_category.post(\"/category/add\")",
         "detail": "routes.category",
         "documentation": {}
     },
@@ -411,7 +447,7 @@
         "kind": 5,
         "importPath": "routes.product",
         "description": "routes.product",
-        "peekOfCode": "router_product = APIRouter()\n#post\n@router_product.post(\"/product/add\")\nasync def create_product(product: Product):\n    collection_product.insert_one(dict(product))\n@router_product.get(\"/product/\")\nasync def get_all_product():\n    products = list_product(collection_product.find())\n    return products\n@router_product.get(\"/product/{id}\")",
+        "peekOfCode": "router_product = APIRouter()\n@router_product.post(\"/product/add\")\nasync def create_product(product: Product):\n    collection_product.insert_one(dict(product))\n@router_product.get(\"/product/\")\nasync def get_all_product():\n    products = list_product(collection_product.find())\n    return products\n@router_product.get(\"/product/{id}\")\nasync def get_one_product(id: str):",
         "detail": "routes.product",
         "documentation": {}
     },

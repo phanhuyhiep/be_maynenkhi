@@ -9,3 +9,5 @@ collection_category = db["Category"]
 collection_product = db["Product"]
 
 collection_auth = db["Auth"]
+
+collection_auth = db["Cart"]

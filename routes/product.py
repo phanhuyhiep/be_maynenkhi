@@ -6,7 +6,6 @@ from schema.product import list_product, product_serial
 
 router_product = APIRouter()
 
-#post
 @router_product.post("/product/add")
 async def create_product(product: Product):
     collection_product.insert_one(dict(product))

@@ -11,6 +11,8 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import smtplib, ssl
 import smtplib
+import random
+import string
 router_auth = APIRouter()
 
 #register
@@ -81,12 +83,13 @@ async def delete_auth(id:str):
     return {"message": "OK"} 
 
 # reset password
-
 @router_auth.post("/auth/forgot_password")
 async def forgot_password(email:str):
+    new_password = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+    hash_newPassword = pbkdf2_sha256.hash(new_password)
     check_email = collection_auth.find_one({"email": email})
-    url = "http://127.0.0.1:5500"
     if check_email:
+        collection_auth.update_one({"email": email}, {"$set": {"password": hash_newPassword}})
         subject = "Hiepph - Reset Password"  
         port = 465  # For SSL
         smtp_server = "smtp.gmail.com"
@@ -97,7 +100,7 @@ async def forgot_password(email:str):
         message["From"] = sender_email
         message["To"] = receiver_email
         message["Subject"] = subject
-        body = f"Click the link to reset your password: {url}/teamplate/reset_password.html"
+        body = f"Chào bạn,\n\nMật khẩu của bạn đã được đặt lại. Dưới đây là mật khẩu mới của bạn:\n\n{new_password}\n\nVui lòng sử dụng mật khẩu này để đăng nhập và sau đó thay đổi thành mật khẩu mới một lần nữa.\n\nTrân trọng,\nHiepph"
         message.attach(MIMEText(body, "plain"))
         context = ssl.create_default_context()
         with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
