@@ -32,6 +32,46 @@
         "documentation": {}
     },
     {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "Field",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "Field",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
         "label": "secrets",
         "kind": 6,
         "isExtraImport": true,
@@ -50,6 +90,14 @@
     },
     {
         "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "APIRouter",
         "importPath": "fastapi",
         "description": "fastapi",
         "isExtraImport": true,
@@ -106,26 +154,10 @@
     },
     {
         "label": "Auth",
-        "importPath": "models.model",
-        "description": "models.model",
+        "importPath": "models.authModel",
+        "description": "models.authModel",
         "isExtraImport": true,
-        "detail": "models.model",
-        "documentation": {}
-    },
-    {
-        "label": "Category",
-        "importPath": "models.model",
-        "description": "models.model",
-        "isExtraImport": true,
-        "detail": "models.model",
-        "documentation": {}
-    },
-    {
-        "label": "Product",
-        "importPath": "models.model",
-        "description": "models.model",
-        "isExtraImport": true,
-        "detail": "models.model",
+        "detail": "models.authModel",
         "documentation": {}
     },
     {
@@ -154,18 +186,18 @@
     },
     {
         "label": "list_auth",
-        "importPath": "schema.auth",
-        "description": "schema.auth",
+        "importPath": "schema.authSchema",
+        "description": "schema.authSchema",
         "isExtraImport": true,
-        "detail": "schema.auth",
+        "detail": "schema.authSchema",
         "documentation": {}
     },
     {
         "label": "auth_seriral",
-        "importPath": "schema.auth",
-        "description": "schema.auth",
+        "importPath": "schema.authSchema",
+        "description": "schema.authSchema",
         "isExtraImport": true,
-        "detail": "schema.auth",
+        "detail": "schema.authSchema",
         "documentation": {}
     },
     {
@@ -261,59 +293,83 @@
         "documentation": {}
     },
     {
-        "label": "list_category",
-        "importPath": "schema.category",
-        "description": "schema.category",
+        "label": "Category",
+        "importPath": "models.categoryModel",
+        "description": "models.categoryModel",
         "isExtraImport": true,
-        "detail": "schema.category",
+        "detail": "models.categoryModel",
+        "documentation": {}
+    },
+    {
+        "label": "list_category",
+        "importPath": "schema.categorySchema",
+        "description": "schema.categorySchema",
+        "isExtraImport": true,
+        "detail": "schema.categorySchema",
         "documentation": {}
     },
     {
         "label": "category_serial",
-        "importPath": "schema.category",
-        "description": "schema.category",
+        "importPath": "schema.categorySchema",
+        "description": "schema.categorySchema",
         "isExtraImport": true,
-        "detail": "schema.category",
+        "detail": "schema.categorySchema",
+        "documentation": {}
+    },
+    {
+        "label": "Product",
+        "importPath": "models.productModel",
+        "description": "models.productModel",
+        "isExtraImport": true,
+        "detail": "models.productModel",
         "documentation": {}
     },
     {
         "label": "list_product",
-        "importPath": "schema.product",
-        "description": "schema.product",
+        "importPath": "schema.productSchema",
+        "description": "schema.productSchema",
         "isExtraImport": true,
-        "detail": "schema.product",
+        "detail": "schema.productSchema",
         "documentation": {}
     },
     {
         "label": "product_serial",
-        "importPath": "schema.product",
-        "description": "schema.product",
+        "importPath": "schema.productSchema",
+        "description": "schema.productSchema",
         "isExtraImport": true,
-        "detail": "schema.product",
+        "detail": "schema.productSchema",
         "documentation": {}
     },
     {
         "label": "router_category",
-        "importPath": "routes.category",
-        "description": "routes.category",
+        "importPath": "routes.routerCategory",
+        "description": "routes.routerCategory",
         "isExtraImport": true,
-        "detail": "routes.category",
+        "detail": "routes.routerCategory",
         "documentation": {}
     },
     {
         "label": "router_product",
-        "importPath": "routes.product",
-        "description": "routes.product",
+        "importPath": "routes.routerProduct",
+        "description": "routes.routerProduct",
         "isExtraImport": true,
-        "detail": "routes.product",
+        "detail": "routes.routerProduct",
         "documentation": {}
     },
     {
         "label": "router_auth",
-        "importPath": "routes.auth",
-        "description": "routes.auth",
+        "importPath": "routes.routerAuth",
+        "description": "routes.routerAuth",
         "isExtraImport": true,
-        "detail": "routes.auth",
+        "detail": "routes.routerAuth",
+        "documentation": {}
+    },
+    {
+        "label": "router_cart",
+        "importPath": "routes.routerCart",
+        "description": "routes.routerCart",
+        "isExtraImport": true,
+        "detail": "routes.routerCart",
         "documentation": {}
     },
     {
@@ -371,138 +427,165 @@
         "documentation": {}
     },
     {
-        "label": "Category",
-        "kind": 6,
-        "importPath": "models.model",
-        "description": "models.model",
-        "peekOfCode": "class Category(BaseModel):\n    name: str\nclass Product(BaseModel):\n    name: str\n    price: float\n    quantity: int\n    description: str\n    categoryId: str\nclass Auth(BaseModel):\n    name: Optional[str] = None",
-        "detail": "models.model",
-        "documentation": {}
-    },
-    {
-        "label": "Product",
-        "kind": 6,
-        "importPath": "models.model",
-        "description": "models.model",
-        "peekOfCode": "class Product(BaseModel):\n    name: str\n    price: float\n    quantity: int\n    description: str\n    categoryId: str\nclass Auth(BaseModel):\n    name: Optional[str] = None\n    email: str\n    password: str",
-        "detail": "models.model",
-        "documentation": {}
-    },
-    {
         "label": "Auth",
         "kind": 6,
-        "importPath": "models.model",
-        "description": "models.model",
-        "peekOfCode": "class Auth(BaseModel):\n    name: Optional[str] = None\n    email: str\n    password: str\n    password_reset_token: str = Field(default_factory=lambda: secrets.token_hex(16))\n    role: str = Field(default=\"USER\")\nclass CartItem(BaseModel):\n    user: int\n    product_cart: list[Product] = []\n    quantity: int",
-        "detail": "models.model",
+        "importPath": "models.authModel",
+        "description": "models.authModel",
+        "peekOfCode": "class Auth(BaseModel):\n    name: Optional[str] = None\n    email: str\n    password: str\n    password_reset_token: str = Field(default_factory=lambda: secrets.token_hex(16))\n    role: str = Field(default=\"USER\")",
+        "detail": "models.authModel",
         "documentation": {}
     },
     {
         "label": "CartItem",
         "kind": 6,
-        "importPath": "models.model",
-        "description": "models.model",
-        "peekOfCode": "class CartItem(BaseModel):\n    user: int\n    product_cart: list[Product] = []\n    quantity: int",
-        "detail": "models.model",
+        "importPath": "models.cartModel",
+        "description": "models.cartModel",
+        "peekOfCode": "class CartItem(BaseModel):\n    id: int\n    quantity: int",
+        "detail": "models.cartModel",
+        "documentation": {}
+    },
+    {
+        "label": "Category",
+        "kind": 6,
+        "importPath": "models.categoryModel",
+        "description": "models.categoryModel",
+        "peekOfCode": "class Category(BaseModel):\n    name: str",
+        "detail": "models.categoryModel",
+        "documentation": {}
+    },
+    {
+        "label": "Product",
+        "kind": 6,
+        "importPath": "models.productModel",
+        "description": "models.productModel",
+        "peekOfCode": "class Product(BaseModel):\n    name: str\n    price: float\n    quantity: int\n    description: str\n    categoryId: str",
+        "detail": "models.productModel",
         "documentation": {}
     },
     {
         "label": "create_access_token",
         "kind": 2,
-        "importPath": "routes.auth",
-        "description": "routes.auth",
+        "importPath": "routes.routerAuth",
+        "description": "routes.routerAuth",
         "peekOfCode": "def create_access_token(auth_id: str):\n    access_token = jwt.encode(\n        claims = {\n            \"id\": auth_id,\n            \"exp\": datetime.utcnow() + timedelta(minutes=30),\n        },\n        key = \"be-page\",\n        algorithm=\"HS256\",\n    )\n    return access_token",
-        "detail": "routes.auth",
+        "detail": "routes.routerAuth",
         "documentation": {}
     },
     {
         "label": "router_auth",
         "kind": 5,
-        "importPath": "routes.auth",
-        "description": "routes.auth",
+        "importPath": "routes.routerAuth",
+        "description": "routes.routerAuth",
         "peekOfCode": "router_auth = APIRouter()\n#register\n@router_auth.post(\"/auth/register\")\nasync def register(auth:Auth):\n    check_user = collection_auth.find_one({\"email\": auth.email})\n    if check_user:\n        raise HTTPException(status_code=400, detail=\"User da ton tai\")\n    hash_password = pbkdf2_sha256.hash(auth.password)\n    new_user = {\n        \"name\": auth.name,",
-        "detail": "routes.auth",
+        "detail": "routes.routerAuth",
         "documentation": {}
     },
     {
         "label": "oauth2_scheme",
         "kind": 5,
-        "importPath": "routes.auth",
-        "description": "routes.auth",
+        "importPath": "routes.routerAuth",
+        "description": "routes.routerAuth",
         "peekOfCode": "oauth2_scheme = OAuth2PasswordBearer(tokenUrl=\"auth/login\")\n@router_auth.post(\"/auth/login\")\nasync def login(auth:Auth):\n    check_user = collection_auth.find_one({\"email\": auth.email})\n    if not check_user:\n        raise HTTPException(status_code=401, detail=\"Tài khoản không tồn tại\")\n    hashed_password = check_user[\"password\"]\n    if not pbkdf2_sha256.verify(auth.password, hashed_password):\n        raise HTTPException(status_code=401, detail=\"Sai password\")\n    token = create_access_token(str(check_user[\"_id\"]))",
-        "detail": "routes.auth",
+        "detail": "routes.routerAuth",
+        "documentation": {}
+    },
+    {
+        "label": "router_cart",
+        "kind": 5,
+        "importPath": "routes.routerCart",
+        "description": "routes.routerCart",
+        "peekOfCode": "router_cart = APIRouter()",
+        "detail": "routes.routerCart",
         "documentation": {}
     },
     {
         "label": "router_category",
         "kind": 5,
-        "importPath": "routes.category",
-        "description": "routes.category",
+        "importPath": "routes.routerCategory",
+        "description": "routes.routerCategory",
         "peekOfCode": "router_category = APIRouter()\n@router_category.get(\"/category/\")\nasync def get_category():\n    category = list_category(collection_category.find())\n    return category\n@router_category.get(\"/category/{id}\")\nasync def get_one_category(id:str):\n    category = category_serial(collection_category.find_one({\"_id\": ObjectId(id)}))\n    return category\n@router_category.post(\"/category/add\")",
-        "detail": "routes.category",
+        "detail": "routes.routerCategory",
         "documentation": {}
     },
     {
         "label": "router_product",
         "kind": 5,
-        "importPath": "routes.product",
-        "description": "routes.product",
+        "importPath": "routes.routerProduct",
+        "description": "routes.routerProduct",
         "peekOfCode": "router_product = APIRouter()\n@router_product.post(\"/product/add\")\nasync def create_product(product: Product):\n    collection_product.insert_one(dict(product))\n@router_product.get(\"/product/\")\nasync def get_all_product():\n    products = list_product(collection_product.find())\n    return products\n@router_product.get(\"/product/{id}\")\nasync def get_one_product(id: str):",
-        "detail": "routes.product",
+        "detail": "routes.routerProduct",
         "documentation": {}
     },
     {
         "label": "auth_seriral",
         "kind": 2,
-        "importPath": "schema.auth",
-        "description": "schema.auth",
+        "importPath": "schema.authSchema",
+        "description": "schema.authSchema",
         "peekOfCode": "def auth_seriral(auth) -> dict:\n    return {\n        \"id\": str(auth[\"_id\"]),\n        \"name\": auth[\"name\"],\n        \"email\": auth[\"email\"],\n        \"password\": auth[\"password\"],\n        \"password_reset_token\": str(auth[\"password_reset_token\"]),\n        \"role\": auth[\"role\"],\n    }\ndef list_auth(auths) -> list:",
-        "detail": "schema.auth",
+        "detail": "schema.authSchema",
         "documentation": {}
     },
     {
         "label": "list_auth",
         "kind": 2,
-        "importPath": "schema.auth",
-        "description": "schema.auth",
+        "importPath": "schema.authSchema",
+        "description": "schema.authSchema",
         "peekOfCode": "def list_auth(auths) -> list:\n    return [auth_seriral(auth) for auth in auths]",
-        "detail": "schema.auth",
+        "detail": "schema.authSchema",
+        "documentation": {}
+    },
+    {
+        "label": "cart_seriral",
+        "kind": 2,
+        "importPath": "schema.cartSchema",
+        "description": "schema.cartSchema",
+        "peekOfCode": "def cart_seriral(cart) -> dict:\n    return {\n        \"id\": str(cart[\"_id\"]),\n        \"product_cart\": str([\"product_cart\"]),\n        \"quantity\": str([\"quantity\"])\n    }\ndef list_cart(carts) -> list:\n    return [cart_seriral(cart) for cart in carts]",
+        "detail": "schema.cartSchema",
+        "documentation": {}
+    },
+    {
+        "label": "list_cart",
+        "kind": 2,
+        "importPath": "schema.cartSchema",
+        "description": "schema.cartSchema",
+        "peekOfCode": "def list_cart(carts) -> list:\n    return [cart_seriral(cart) for cart in carts]",
+        "detail": "schema.cartSchema",
         "documentation": {}
     },
     {
         "label": "category_serial",
         "kind": 2,
-        "importPath": "schema.category",
-        "description": "schema.category",
+        "importPath": "schema.categorySchema",
+        "description": "schema.categorySchema",
         "peekOfCode": "def category_serial(category) -> dict:\n    return {\n        \"id\": str(category[\"_id\"]),\n        \"name\": category[\"name\"]\n    }\ndef list_category(categorys) -> list:\n    return [category_serial(category) for category in categorys]",
-        "detail": "schema.category",
+        "detail": "schema.categorySchema",
         "documentation": {}
     },
     {
         "label": "list_category",
         "kind": 2,
-        "importPath": "schema.category",
-        "description": "schema.category",
+        "importPath": "schema.categorySchema",
+        "description": "schema.categorySchema",
         "peekOfCode": "def list_category(categorys) -> list:\n    return [category_serial(category) for category in categorys]",
-        "detail": "schema.category",
+        "detail": "schema.categorySchema",
         "documentation": {}
     },
     {
         "label": "product_serial",
         "kind": 2,
-        "importPath": "schema.product",
-        "description": "schema.product",
+        "importPath": "schema.productSchema",
+        "description": "schema.productSchema",
         "peekOfCode": "def product_serial(product) -> dict:\n    return{\n        \"id\": str(product[\"_id\"]),\n        \"name\": product[\"name\"],\n        \"price\": product[\"price\"],\n        \"quantity\": product[\"quantity\"],\n        \"description\": product[\"description\"],\n        \"categoryId\": product[\"categoryId\"]\n    }\ndef list_product(products) -> list:",
-        "detail": "schema.product",
+        "detail": "schema.productSchema",
         "documentation": {}
     },
     {
         "label": "list_product",
         "kind": 2,
-        "importPath": "schema.product",
-        "description": "schema.product",
+        "importPath": "schema.productSchema",
+        "description": "schema.productSchema",
         "peekOfCode": "def list_product(products) -> list:\n    return [product_serial(product) for product in products]",
-        "detail": "schema.product",
+        "detail": "schema.productSchema",
         "documentation": {}
     },
     {
@@ -510,7 +593,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = FastAPI()\napp.include_router(router_category)\napp.include_router(router_product)\napp.include_router(router_auth)",
+        "peekOfCode": "app = FastAPI()\napp.include_router(router_category)\napp.include_router(router_product)\napp.include_router(router_auth)\napp.include_router(router_cart)",
         "detail": "main",
         "documentation": {}
     }

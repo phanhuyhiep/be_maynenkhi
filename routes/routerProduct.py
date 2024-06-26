@@ -1,8 +1,8 @@
 from fastapi import APIRouter
 from bson import ObjectId
-from models.model import Product
+from models.productModel import Product
 from config.database import collection_product
-from schema.product import list_product, product_serial
+from schema.productSchema import list_product, product_serial
 
 router_product = APIRouter()
 

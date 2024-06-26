@@ -1,8 +1,8 @@
 from fastapi import APIRouter
 from bson import ObjectId
-from models.model import Category
+from models.categoryModel import Category
 from config.database import collection_category
-from schema.category import list_category, category_serial
+from schema.categorySchema import list_category, category_serial
 
 router_category = APIRouter()
 

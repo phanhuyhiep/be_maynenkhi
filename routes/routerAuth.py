@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException
 from bson import ObjectId
-from models.model import Auth
+from models.authModel import Auth
 from config.database import collection_auth
-from schema.auth import list_auth, auth_seriral
+from schema.authSchema import list_auth, auth_seriral
 from passlib.hash import pbkdf2_sha256
 from jose import jwt
 from datetime import datetime, timedelta
