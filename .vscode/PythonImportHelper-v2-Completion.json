@@ -1,6 +1,87 @@
 [
     {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "BaseSettings",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "Field",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
         "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "errors",
         "importPath": "pymongo",
         "description": "pymongo",
         "isExtraImport": true,
@@ -16,59 +97,35 @@
         "documentation": {}
     },
     {
-        "label": "BaseModel",
-        "importPath": "pydantic",
-        "description": "pydantic",
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
         "isExtraImport": true,
-        "detail": "pydantic",
+        "detail": "typing",
         "documentation": {}
     },
     {
-        "label": "Field",
-        "importPath": "pydantic",
-        "description": "pydantic",
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
         "isExtraImport": true,
-        "detail": "pydantic",
+        "detail": "typing",
         "documentation": {}
     },
     {
-        "label": "BaseModel",
-        "importPath": "pydantic",
-        "description": "pydantic",
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
         "isExtraImport": true,
-        "detail": "pydantic",
+        "detail": "typing",
         "documentation": {}
     },
     {
-        "label": "Field",
-        "importPath": "pydantic",
-        "description": "pydantic",
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
         "isExtraImport": true,
-        "detail": "pydantic",
-        "documentation": {}
-    },
-    {
-        "label": "BaseModel",
-        "importPath": "pydantic",
-        "description": "pydantic",
-        "isExtraImport": true,
-        "detail": "pydantic",
-        "documentation": {}
-    },
-    {
-        "label": "BaseModel",
-        "importPath": "pydantic",
-        "description": "pydantic",
-        "isExtraImport": true,
-        "detail": "pydantic",
-        "documentation": {}
-    },
-    {
-        "label": "Field",
-        "importPath": "pydantic",
-        "description": "pydantic",
-        "isExtraImport": true,
-        "detail": "pydantic",
+        "detail": "typing",
         "documentation": {}
     },
     {
@@ -78,6 +135,30 @@
         "importPath": "secrets",
         "description": "secrets",
         "detail": "secrets",
+        "documentation": {}
+    },
+    {
+        "label": "Form",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "UploadFile",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "File",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
         "documentation": {}
     },
     {
@@ -114,6 +195,46 @@
     },
     {
         "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "File",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "UploadFile",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Form",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
         "importPath": "fastapi",
         "description": "fastapi",
         "isExtraImport": true,
@@ -162,6 +283,14 @@
     },
     {
         "label": "collection_auth",
+        "importPath": "config.database",
+        "description": "config.database",
+        "isExtraImport": true,
+        "detail": "config.database",
+        "documentation": {}
+    },
+    {
+        "label": "collection_cart",
         "importPath": "config.database",
         "description": "config.database",
         "isExtraImport": true,
@@ -293,6 +422,22 @@
         "documentation": {}
     },
     {
+        "label": "list_cart",
+        "importPath": "schema.cartSchema",
+        "description": "schema.cartSchema",
+        "isExtraImport": true,
+        "detail": "schema.cartSchema",
+        "documentation": {}
+    },
+    {
+        "label": "Cart",
+        "importPath": "models.cartModel",
+        "description": "models.cartModel",
+        "isExtraImport": true,
+        "detail": "models.cartModel",
+        "documentation": {}
+    },
+    {
         "label": "Category",
         "importPath": "models.categoryModel",
         "description": "models.categoryModel",
@@ -317,6 +462,24 @@
         "documentation": {}
     },
     {
+        "label": "cloudinary.uploader",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "cloudinary.uploader",
+        "description": "cloudinary.uploader",
+        "detail": "cloudinary.uploader",
+        "documentation": {}
+    },
+    {
+        "label": "cloudinary",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "cloudinary",
+        "description": "cloudinary",
+        "detail": "cloudinary",
+        "documentation": {}
+    },
+    {
         "label": "Product",
         "importPath": "models.productModel",
         "description": "models.productModel",
@@ -338,6 +501,14 @@
         "description": "schema.productSchema",
         "isExtraImport": true,
         "detail": "schema.productSchema",
+        "documentation": {}
+    },
+    {
+        "label": "jsonable_encoder",
+        "importPath": "fastapi.encoders",
+        "description": "fastapi.encoders",
+        "isExtraImport": true,
+        "detail": "fastapi.encoders",
         "documentation": {}
     },
     {
@@ -373,57 +544,30 @@
         "documentation": {}
     },
     {
-        "label": "client",
+        "label": "API_SECRET",
         "kind": 5,
-        "importPath": "config.database",
-        "description": "config.database",
-        "peekOfCode": "client = MongoClient(\"mongodb+srv://hiepph:hiep2003@cluster0.owfcn5g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0\")\ndb = client.page_db \ncollection_category = db[\"Category\"]\ncollection_product = db[\"Product\"]\ncollection_auth = db[\"Auth\"]\ncollection_auth = db[\"Cart\"]",
-        "detail": "config.database",
+        "importPath": "config.cloudinary",
+        "description": "config.cloudinary",
+        "peekOfCode": "API_SECRET = os.environ.get('API_SECRET')",
+        "detail": "config.cloudinary",
         "documentation": {}
     },
     {
-        "label": "db",
-        "kind": 5,
-        "importPath": "config.database",
-        "description": "config.database",
-        "peekOfCode": "db = client.page_db \ncollection_category = db[\"Category\"]\ncollection_product = db[\"Product\"]\ncollection_auth = db[\"Auth\"]\ncollection_auth = db[\"Cart\"]",
-        "detail": "config.database",
+        "label": "Settings",
+        "kind": 6,
+        "importPath": "config.config",
+        "description": "config.config",
+        "peekOfCode": "class Settings(BaseSettings):\n    DATABASE_PORT: int\n    POSTGRES_PASSWORD: str\n    POSTGRES_USER: str\n    POSTGRES_DB: str\n    POSTGRES_HOST: str\n    POSTGRES_HOSTNAME: str\n    class Config:\n        env_file = '../.env'\nsettings = Settings()",
+        "detail": "config.config",
         "documentation": {}
     },
     {
-        "label": "collection_category",
+        "label": "settings",
         "kind": 5,
-        "importPath": "config.database",
-        "description": "config.database",
-        "peekOfCode": "collection_category = db[\"Category\"]\ncollection_product = db[\"Product\"]\ncollection_auth = db[\"Auth\"]\ncollection_auth = db[\"Cart\"]",
-        "detail": "config.database",
-        "documentation": {}
-    },
-    {
-        "label": "collection_product",
-        "kind": 5,
-        "importPath": "config.database",
-        "description": "config.database",
-        "peekOfCode": "collection_product = db[\"Product\"]\ncollection_auth = db[\"Auth\"]\ncollection_auth = db[\"Cart\"]",
-        "detail": "config.database",
-        "documentation": {}
-    },
-    {
-        "label": "collection_auth",
-        "kind": 5,
-        "importPath": "config.database",
-        "description": "config.database",
-        "peekOfCode": "collection_auth = db[\"Auth\"]\ncollection_auth = db[\"Cart\"]",
-        "detail": "config.database",
-        "documentation": {}
-    },
-    {
-        "label": "collection_auth",
-        "kind": 5,
-        "importPath": "config.database",
-        "description": "config.database",
-        "peekOfCode": "collection_auth = db[\"Cart\"]",
-        "detail": "config.database",
+        "importPath": "config.config",
+        "description": "config.config",
+        "peekOfCode": "settings = Settings()",
+        "detail": "config.config",
         "documentation": {}
     },
     {
@@ -436,11 +580,11 @@
         "documentation": {}
     },
     {
-        "label": "CartItem",
+        "label": "Cart",
         "kind": 6,
         "importPath": "models.cartModel",
         "description": "models.cartModel",
-        "peekOfCode": "class CartItem(BaseModel):\n    id: int\n    quantity: int",
+        "peekOfCode": "class Cart(BaseModel):\n    nameProduct: str\n    imgProduct: str\n    priceProduct: str\n    quantity: str",
         "detail": "models.cartModel",
         "documentation": {}
     },
@@ -458,7 +602,7 @@
         "kind": 6,
         "importPath": "models.productModel",
         "description": "models.productModel",
-        "peekOfCode": "class Product(BaseModel):\n    name: str\n    price: float\n    quantity: int\n    description: str\n    categoryId: str",
+        "peekOfCode": "class Product(BaseModel):\n    name: str = Form(...),\n    price: float = Form(...),\n    quantity: int = Form(...),\n    description: str = Form(...),\n    categoryId: Optional[str] = Form(None),\n    images: List[UploadFile] = File(...)",
         "detail": "models.productModel",
         "documentation": {}
     },
@@ -494,7 +638,7 @@
         "kind": 5,
         "importPath": "routes.routerCart",
         "description": "routes.routerCart",
-        "peekOfCode": "router_cart = APIRouter()",
+        "peekOfCode": "router_cart = APIRouter()\n@router_cart.get(\"/cart/\")\nasync def get_all_cart():\n    carts = list_cart(collection_cart.find())\n    return carts\n@router_cart.post(\"/cart/add\")\nasync def create_cart(cart: Cart):\n    collection_cart.insert_one(dict(cart))",
         "detail": "routes.routerCart",
         "documentation": {}
     },
@@ -508,11 +652,38 @@
         "documentation": {}
     },
     {
+        "label": "CLOUD_NAME",
+        "kind": 5,
+        "importPath": "routes.routerProduct",
+        "description": "routes.routerProduct",
+        "peekOfCode": "CLOUD_NAME = os.getenv('CLOUD_NAME')\nAPI_KEY = os.getenv('API_KEY')\nAPI_SECRET = os.getenv('API_SECRET')\nrouter_product = APIRouter()\ncloudinary.config(\n    cloud_name= CLOUD_NAME,\n    api_key = API_KEY,\n    api_secret= API_SECRET\n)\n@router_product.post(\"/product/add\")",
+        "detail": "routes.routerProduct",
+        "documentation": {}
+    },
+    {
+        "label": "API_KEY",
+        "kind": 5,
+        "importPath": "routes.routerProduct",
+        "description": "routes.routerProduct",
+        "peekOfCode": "API_KEY = os.getenv('API_KEY')\nAPI_SECRET = os.getenv('API_SECRET')\nrouter_product = APIRouter()\ncloudinary.config(\n    cloud_name= CLOUD_NAME,\n    api_key = API_KEY,\n    api_secret= API_SECRET\n)\n@router_product.post(\"/product/add\")\nasync def create_product(",
+        "detail": "routes.routerProduct",
+        "documentation": {}
+    },
+    {
+        "label": "API_SECRET",
+        "kind": 5,
+        "importPath": "routes.routerProduct",
+        "description": "routes.routerProduct",
+        "peekOfCode": "API_SECRET = os.getenv('API_SECRET')\nrouter_product = APIRouter()\ncloudinary.config(\n    cloud_name= CLOUD_NAME,\n    api_key = API_KEY,\n    api_secret= API_SECRET\n)\n@router_product.post(\"/product/add\")\nasync def create_product(\n    name: str = Form(...),",
+        "detail": "routes.routerProduct",
+        "documentation": {}
+    },
+    {
         "label": "router_product",
         "kind": 5,
         "importPath": "routes.routerProduct",
         "description": "routes.routerProduct",
-        "peekOfCode": "router_product = APIRouter()\n@router_product.post(\"/product/add\")\nasync def create_product(product: Product):\n    collection_product.insert_one(dict(product))\n@router_product.get(\"/product/\")\nasync def get_all_product():\n    products = list_product(collection_product.find())\n    return products\n@router_product.get(\"/product/{id}\")\nasync def get_one_product(id: str):",
+        "peekOfCode": "router_product = APIRouter()\ncloudinary.config(\n    cloud_name= CLOUD_NAME,\n    api_key = API_KEY,\n    api_secret= API_SECRET\n)\n@router_product.post(\"/product/add\")\nasync def create_product(\n    name: str = Form(...),\n    price: float = Form(...),",
         "detail": "routes.routerProduct",
         "documentation": {}
     },
@@ -535,11 +706,11 @@
         "documentation": {}
     },
     {
-        "label": "cart_seriral",
+        "label": "cart_serial",
         "kind": 2,
         "importPath": "schema.cartSchema",
         "description": "schema.cartSchema",
-        "peekOfCode": "def cart_seriral(cart) -> dict:\n    return {\n        \"id\": str(cart[\"_id\"]),\n        \"product_cart\": str([\"product_cart\"]),\n        \"quantity\": str([\"quantity\"])\n    }\ndef list_cart(carts) -> list:\n    return [cart_seriral(cart) for cart in carts]",
+        "peekOfCode": "def cart_serial(cart) -> dict:\n    return{\n        \"id\": str(cart[\"_id\"]),\n        \"nameProduct\": str(cart[\"nameProduct\"]),\n        \"imgProduct\": str(cart[\"imgProduct\"]),\n        \"priceProduct\":str(cart[\"priceProduct\"]),\n        \"quantity\":\"quantity\"\n    }\ndef list_cart(carts) -> list:\n    return[cart_serial(cart) for cart in carts]",
         "detail": "schema.cartSchema",
         "documentation": {}
     },
@@ -548,7 +719,7 @@
         "kind": 2,
         "importPath": "schema.cartSchema",
         "description": "schema.cartSchema",
-        "peekOfCode": "def list_cart(carts) -> list:\n    return [cart_seriral(cart) for cart in carts]",
+        "peekOfCode": "def list_cart(carts) -> list:\n    return[cart_serial(cart) for cart in carts]",
         "detail": "schema.cartSchema",
         "documentation": {}
     },
@@ -575,7 +746,7 @@
         "kind": 2,
         "importPath": "schema.productSchema",
         "description": "schema.productSchema",
-        "peekOfCode": "def product_serial(product) -> dict:\n    return{\n        \"id\": str(product[\"_id\"]),\n        \"name\": product[\"name\"],\n        \"price\": product[\"price\"],\n        \"quantity\": product[\"quantity\"],\n        \"description\": product[\"description\"],\n        \"categoryId\": product[\"categoryId\"]\n    }\ndef list_product(products) -> list:",
+        "peekOfCode": "def product_serial(product) -> dict:\n    return {\n        \"id\": str(product.get(\"_id\", \"N/A\")),\n        \"name\": product.get(\"name\", \"N/A\"),\n        \"images\": product.get(\"images\", [\"N/A\"]),\n        \"price\": product.get(\"price\", \"N/A\"),\n        \"quantity\": product.get(\"quantity\", \"N/A\"),\n        \"description\": product.get(\"description\", \"N/A\"),\n        \"categoryId\": product.get(\"categoryId\", \"N/A\")\n    }",
         "detail": "schema.productSchema",
         "documentation": {}
     },

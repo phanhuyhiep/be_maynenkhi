@@ -1,10 +1,11 @@
-
-from pydantic import BaseModel, Field
-
+from typing import Optional, List
+from pydantic import BaseModel
+from fastapi import Form, UploadFile, File
 class Product(BaseModel):
-    name: str
-    price: float
-    quantity: int
-    description: str
-    categoryId: str
+    name: str = Form(...),
+    price: float = Form(...),
+    quantity: int = Form(...),
+    description: str = Form(...),
+    categoryId: Optional[str] = Form(None),
+    images: List[UploadFile] = File(...)
 

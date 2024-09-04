@@ -37,20 +37,17 @@ async def register(auth:Auth):
 
 #login
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
+
 @router_auth.post("/auth/login")
 async def login(auth:Auth):
     check_user = collection_auth.find_one({"email": auth.email})
     if not check_user:
         raise HTTPException(status_code=401, detail="Tài khoản không tồn tại")
-    
     hashed_password = check_user["password"]
     if not pbkdf2_sha256.verify(auth.password, hashed_password):
         raise HTTPException(status_code=401, detail="Sai password")
-
     token = create_access_token(str(check_user["_id"]))
-    
     return {"access_token": token}
-
 def create_access_token(auth_id: str):
     access_token = jwt.encode(
         claims = {
@@ -65,8 +62,8 @@ def create_access_token(auth_id: str):
 @router_auth.get("/auth/")
 async def get_auth():
     auth = list_auth(collection_auth.find())
-    return auth
-  
+    return auth 
+
 @router_auth.get("/auth/{id}")
 async def get_one_auth( id: str):
     auth = collection_auth.find_one({"_id": ObjectId(id)})

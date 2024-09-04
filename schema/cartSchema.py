@@ -1,9 +1,11 @@
-def cart_seriral(cart) -> dict:
-    return {
+def cart_serial(cart) -> dict:
+    return{
         "id": str(cart["_id"]),
-        "product_cart": str(["product_cart"]),
-        "quantity": str(["quantity"])
+        "nameProduct": str(cart["nameProduct"]),
+        "imgProduct": str(cart["imgProduct"]),
+        "priceProduct":str(cart["priceProduct"]),
+        "quantity":"quantity"
     }
-
+    
 def list_cart(carts) -> list:
-    return [cart_seriral(cart) for cart in carts]
+    return[cart_serial(cart) for cart in carts]
