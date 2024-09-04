@@ -146,6 +146,22 @@
         "documentation": {}
     },
     {
+        "label": "Form",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Form",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
         "label": "UploadFile",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -178,6 +194,14 @@
         "documentation": {}
     },
     {
+        "label": "Depends",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
         "label": "APIRouter",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -187,6 +211,14 @@
     },
     {
         "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Depends",
         "importPath": "fastapi",
         "description": "fastapi",
         "isExtraImport": true,
@@ -575,7 +607,7 @@
         "kind": 6,
         "importPath": "models.authModel",
         "description": "models.authModel",
-        "peekOfCode": "class Auth(BaseModel):\n    name: Optional[str] = None\n    email: str\n    password: str\n    password_reset_token: str = Field(default_factory=lambda: secrets.token_hex(16))\n    role: str = Field(default=\"USER\")",
+        "peekOfCode": "class Auth(BaseModel):\n    name: Optional[str] = None\n    email: str\n    password: str\n    password_reset_token: str = Field(default_factory=lambda: secrets.token_hex(16))\n    role: str = Field(default=\"USER\")\n    @classmethod\n    def as_form(\n        cls,\n        name: Optional[str] = Form(None),",
         "detail": "models.authModel",
         "documentation": {}
     },
@@ -593,7 +625,7 @@
         "kind": 6,
         "importPath": "models.categoryModel",
         "description": "models.categoryModel",
-        "peekOfCode": "class Category(BaseModel):\n    name: str",
+        "peekOfCode": "class Category(BaseModel):\n    name: str\n    @classmethod\n    def as_form(\n        cls,\n        name: str = Form(...),\n    ) -> 'Category':\n        return cls(name=name)",
         "detail": "models.categoryModel",
         "documentation": {}
     },
@@ -620,7 +652,7 @@
         "kind": 5,
         "importPath": "routes.routerAuth",
         "description": "routes.routerAuth",
-        "peekOfCode": "router_auth = APIRouter()\n#register\n@router_auth.post(\"/auth/register\")\nasync def register(auth:Auth):\n    check_user = collection_auth.find_one({\"email\": auth.email})\n    if check_user:\n        raise HTTPException(status_code=400, detail=\"User da ton tai\")\n    hash_password = pbkdf2_sha256.hash(auth.password)\n    new_user = {\n        \"name\": auth.name,",
+        "peekOfCode": "router_auth = APIRouter()\n#register\n@router_auth.post(\"/auth/register\")\nasync def register(auth:Auth = Depends(Auth.as_form)):\n    check_user = collection_auth.find_one({\"email\": auth.email})\n    if check_user:\n        raise HTTPException(status_code=400, detail=\"User da ton tai\")\n    hash_password = pbkdf2_sha256.hash(auth.password)\n    new_user = {\n        \"name\": auth.name,",
         "detail": "routes.routerAuth",
         "documentation": {}
     },
@@ -629,7 +661,7 @@
         "kind": 5,
         "importPath": "routes.routerAuth",
         "description": "routes.routerAuth",
-        "peekOfCode": "oauth2_scheme = OAuth2PasswordBearer(tokenUrl=\"auth/login\")\n@router_auth.post(\"/auth/login\")\nasync def login(auth:Auth):\n    check_user = collection_auth.find_one({\"email\": auth.email})\n    if not check_user:\n        raise HTTPException(status_code=401, detail=\"Tài khoản không tồn tại\")\n    hashed_password = check_user[\"password\"]\n    if not pbkdf2_sha256.verify(auth.password, hashed_password):\n        raise HTTPException(status_code=401, detail=\"Sai password\")\n    token = create_access_token(str(check_user[\"_id\"]))",
+        "peekOfCode": "oauth2_scheme = OAuth2PasswordBearer(tokenUrl=\"auth/login\")\n@router_auth.post(\"/auth/login\")\nasync def login(auth:Auth = Depends(Auth.as_form)):\n    check_user = collection_auth.find_one({\"email\": auth.email})\n    if not check_user:\n        raise HTTPException(status_code=401, detail=\"Tài khoản không tồn tại\")\n    hashed_password = check_user[\"password\"]\n    if not pbkdf2_sha256.verify(auth.password, hashed_password):\n        raise HTTPException(status_code=401, detail=\"Sai password\")\n    token = create_access_token(str(check_user[\"_id\"]))",
         "detail": "routes.routerAuth",
         "documentation": {}
     },
