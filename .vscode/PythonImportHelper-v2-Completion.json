@@ -105,6 +105,15 @@
         "documentation": {}
     },
     {
+        "label": "certifi",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "certifi",
+        "description": "certifi",
+        "detail": "certifi",
+        "documentation": {}
+    },
+    {
         "label": "Optional",
         "importPath": "typing",
         "description": "typing",
@@ -745,6 +754,15 @@
         "description": "config.config",
         "peekOfCode": "settings = Settings()",
         "detail": "config.config",
+        "documentation": {}
+    },
+    {
+        "label": "mongoUrl",
+        "kind": 5,
+        "importPath": "config.database",
+        "description": "config.database",
+        "peekOfCode": "mongoUrl = os.environ.get('BASE_URL')\ntry:\n    client = MongoClient(mongoUrl, tlsCAFile=certifi.where())\n    db = client.page_db\n    collection_category = db[\"Category\"]\n    collection_product = db[\"Product\"]\n    collection_auth = db[\"Auth\"]\n    collection_cart = db[\"Cart\"]\n    collection_order = db[\"Order\"]\nexcept errors.ConnectionError as e:",
+        "detail": "config.database",
         "documentation": {}
     },
     {
