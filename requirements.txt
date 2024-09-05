@@ -1,7 +1,7 @@
 fastapi==0.110.0
 pydantic==2.6.4
 pydantic_core==2.16.3
-pymongo==5.0.0
+pymongo
 python-dotenv==1.0.1
 uvicorn==0.29.0
 cloudinary
