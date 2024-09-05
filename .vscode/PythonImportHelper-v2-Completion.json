@@ -713,6 +713,14 @@
         "documentation": {}
     },
     {
+        "label": "CORSMiddleware",
+        "importPath": "fastapi.middleware.cors",
+        "description": "fastapi.middleware.cors",
+        "isExtraImport": true,
+        "detail": "fastapi.middleware.cors",
+        "documentation": {}
+    },
+    {
         "label": "API_SECRET",
         "kind": 5,
         "importPath": "config.cloudinary",
@@ -969,7 +977,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = FastAPI()\napp.include_router(router_category)\napp.include_router(router_product)\napp.include_router(router_auth)\napp.include_router(router_cart)\napp.include_router(router_order)\nif __name__ == \"__main__\":\n    uvicorn.run(\"main:app\", host=\"0.0.0.0\", port=8000, reload=True)",
+        "peekOfCode": "app = FastAPI()\napp.include_router(router_category)\napp.include_router(router_product)\napp.include_router(router_auth)\napp.include_router(router_cart)\napp.include_router(router_order)\nallow_origins=[\"*\"]\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=allow_origins,  # Cho phép các nguồn gốc cụ thể",
         "detail": "main",
         "documentation": {}
     }
