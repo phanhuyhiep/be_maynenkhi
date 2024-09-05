@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from routes.routerOrder import router_order
 from routes.routerCategory import router_category
 from routes.routerProduct import router_product
 from routes.routerAuth import router_auth
@@ -10,4 +11,5 @@ app.include_router(router_category)
 app.include_router(router_product)
 app.include_router(router_auth)
 app.include_router(router_cart)
+app.include_router(router_order)
 

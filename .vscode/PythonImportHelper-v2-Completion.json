@@ -73,6 +73,22 @@
         "documentation": {}
     },
     {
+        "label": "Field",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
         "label": "MongoClient",
         "importPath": "pymongo",
         "description": "pymongo",
@@ -90,6 +106,22 @@
     },
     {
         "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Literal",
         "importPath": "typing",
         "description": "typing",
         "isExtraImport": true,
@@ -162,6 +194,22 @@
         "documentation": {}
     },
     {
+        "label": "Form",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Form",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
         "label": "UploadFile",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -203,6 +251,30 @@
     },
     {
         "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Depends",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Depends",
         "importPath": "fastapi",
         "description": "fastapi",
         "isExtraImport": true,
@@ -282,6 +354,46 @@
         "documentation": {}
     },
     {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "ObjectId",
+        "importPath": "bson",
+        "description": "bson",
+        "isExtraImport": true,
+        "detail": "bson",
+        "documentation": {}
+    },
+    {
+        "label": "ObjectId",
+        "importPath": "bson",
+        "description": "bson",
+        "isExtraImport": true,
+        "detail": "bson",
+        "documentation": {}
+    },
+    {
         "label": "ObjectId",
         "importPath": "bson",
         "description": "bson",
@@ -338,6 +450,14 @@
         "documentation": {}
     },
     {
+        "label": "collection_order",
+        "importPath": "config.database",
+        "description": "config.database",
+        "isExtraImport": true,
+        "detail": "config.database",
+        "documentation": {}
+    },
+    {
         "label": "collection_product",
         "importPath": "config.database",
         "description": "config.database",
@@ -375,22 +495,6 @@
         "description": "jose",
         "isExtraImport": true,
         "detail": "jose",
-        "documentation": {}
-    },
-    {
-        "label": "datetime",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "timedelta",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
         "documentation": {}
     },
     {
@@ -494,6 +598,22 @@
         "documentation": {}
     },
     {
+        "label": "Order",
+        "importPath": "models.orderModel",
+        "description": "models.orderModel",
+        "isExtraImport": true,
+        "detail": "models.orderModel",
+        "documentation": {}
+    },
+    {
+        "label": "list_order",
+        "importPath": "schema.orderSchema",
+        "description": "schema.orderSchema",
+        "isExtraImport": true,
+        "detail": "schema.orderSchema",
+        "documentation": {}
+    },
+    {
         "label": "cloudinary.uploader",
         "kind": 6,
         "isExtraImport": true,
@@ -541,6 +661,14 @@
         "description": "fastapi.encoders",
         "isExtraImport": true,
         "detail": "fastapi.encoders",
+        "documentation": {}
+    },
+    {
+        "label": "router_order",
+        "importPath": "routes.routerOrder",
+        "description": "routes.routerOrder",
+        "isExtraImport": true,
+        "detail": "routes.routerOrder",
         "documentation": {}
     },
     {
@@ -616,7 +744,7 @@
         "kind": 6,
         "importPath": "models.cartModel",
         "description": "models.cartModel",
-        "peekOfCode": "class Cart(BaseModel):\n    nameProduct: str\n    imgProduct: str\n    priceProduct: str\n    quantity: str",
+        "peekOfCode": "class Cart(BaseModel):\n    quantity: float\n    productId: Optional[str] = Form(None),\n    @classmethod\n    def as_form(\n        cls,\n        quantity: float = Form(...),\n        productId: Optional[str] = Form(...)\n    ) -> 'Cart':\n        return cls(",
         "detail": "models.cartModel",
         "documentation": {}
     },
@@ -627,6 +755,15 @@
         "description": "models.categoryModel",
         "peekOfCode": "class Category(BaseModel):\n    name: str\n    @classmethod\n    def as_form(\n        cls,\n        name: str = Form(...),\n    ) -> 'Category':\n        return cls(name=name)",
         "detail": "models.categoryModel",
+        "documentation": {}
+    },
+    {
+        "label": "Order",
+        "kind": 6,
+        "importPath": "models.orderModel",
+        "description": "models.orderModel",
+        "peekOfCode": "class Order(BaseModel):\n    fullName: str\n    phoneNumber: str\n    city: str\n    district: str\n    commune: str\n    detailAddress: str\n    total: float\n    productName: str\n    productPrice: float",
+        "detail": "models.orderModel",
         "documentation": {}
     },
     {
@@ -670,7 +807,7 @@
         "kind": 5,
         "importPath": "routes.routerCart",
         "description": "routes.routerCart",
-        "peekOfCode": "router_cart = APIRouter()\n@router_cart.get(\"/cart/\")\nasync def get_all_cart():\n    carts = list_cart(collection_cart.find())\n    return carts\n@router_cart.post(\"/cart/add\")\nasync def create_cart(cart: Cart):\n    collection_cart.insert_one(dict(cart))",
+        "peekOfCode": "router_cart = APIRouter()\n@router_cart.get(\"/cart/\")\nasync def get_all_cart():\n    carts = list_cart(collection_cart.find())\n    return carts\n@router_cart.post(\"/cart/add\")\nasync def create_cart(cart: Cart = Depends(Cart.as_form)):\n    collection_cart.insert_one(dict(cart))\n    return \"OK\"\n@router_cart.put(\"/cart/edit/{id_cart}\")",
         "detail": "routes.routerCart",
         "documentation": {}
     },
@@ -681,6 +818,15 @@
         "description": "routes.routerCategory",
         "peekOfCode": "router_category = APIRouter()\n@router_category.get(\"/category/\")\nasync def get_category():\n    category = list_category(collection_category.find())\n    return category\n@router_category.get(\"/category/{id}\")\nasync def get_one_category(id:str):\n    category = category_serial(collection_category.find_one({\"_id\": ObjectId(id)}))\n    return category\n@router_category.post(\"/category/add\")",
         "detail": "routes.routerCategory",
+        "documentation": {}
+    },
+    {
+        "label": "router_order",
+        "kind": 5,
+        "importPath": "routes.routerOrder",
+        "description": "routes.routerOrder",
+        "peekOfCode": "router_order = APIRouter()\n@router_order.get(\"/order/\")\nasync def get_all_order():\n    orders = list_order(collection_order.find())\n    return orders\n@router_order.post(\"/order/add\")\nasync def create_order(order:Order = Depends(Order.as_form)):\n    collection_order.insert_one(dict(order))\n    return \"Message: OK\"\n@router_order.put(\"/order/edit/{id_order}\")",
+        "detail": "routes.routerOrder",
         "documentation": {}
     },
     {
@@ -742,7 +888,7 @@
         "kind": 2,
         "importPath": "schema.cartSchema",
         "description": "schema.cartSchema",
-        "peekOfCode": "def cart_serial(cart) -> dict:\n    return{\n        \"id\": str(cart[\"_id\"]),\n        \"nameProduct\": str(cart[\"nameProduct\"]),\n        \"imgProduct\": str(cart[\"imgProduct\"]),\n        \"priceProduct\":str(cart[\"priceProduct\"]),\n        \"quantity\":\"quantity\"\n    }\ndef list_cart(carts) -> list:\n    return[cart_serial(cart) for cart in carts]",
+        "peekOfCode": "def cart_serial(cart) -> dict:\n    return{\n        \"id\": str(cart[\"_id\"]),\n        \"quantity\": cart[\"quantity\"],\n        \"productId\":cart[\"productId\"]\n    }\ndef list_cart(carts) -> list:\n    return[cart_serial(cart) for cart in carts]",
         "detail": "schema.cartSchema",
         "documentation": {}
     },
@@ -774,6 +920,24 @@
         "documentation": {}
     },
     {
+        "label": "order_serial",
+        "kind": 2,
+        "importPath": "schema.orderSchema",
+        "description": "schema.orderSchema",
+        "peekOfCode": "def order_serial(order) -> dict:\n    return {\n        \"id\":str(order[\"_id\"]),\n        \"fullName\": str(order[\"fullName\"]),\n        \"phoneNumber\": str(order[\"phoneNumber\"]),\n        \"city\": str(order[\"city\"]),\n        \"district\": str(order[\"district\"]),\n        \"commune\": str(order[\"commune\"]),\n        \"detailAddress\": str(order[\"detailAddress\"]),\n        \"total\": float(order[\"total\"]),",
+        "detail": "schema.orderSchema",
+        "documentation": {}
+    },
+    {
+        "label": "list_order",
+        "kind": 2,
+        "importPath": "schema.orderSchema",
+        "description": "schema.orderSchema",
+        "peekOfCode": "def list_order(orders) -> list:\n    return[order_serial(order) for order in orders]",
+        "detail": "schema.orderSchema",
+        "documentation": {}
+    },
+    {
         "label": "product_serial",
         "kind": 2,
         "importPath": "schema.productSchema",
@@ -796,7 +960,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = FastAPI()\napp.include_router(router_category)\napp.include_router(router_product)\napp.include_router(router_auth)\napp.include_router(router_cart)",
+        "peekOfCode": "app = FastAPI()\napp.include_router(router_category)\napp.include_router(router_product)\napp.include_router(router_auth)\napp.include_router(router_cart)\napp.include_router(router_order)",
         "detail": "main",
         "documentation": {}
     }

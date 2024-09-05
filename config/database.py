@@ -8,5 +8,6 @@ try:
     collection_product = db["Product"]
     collection_auth = db["Auth"]
     collection_cart = db["Cart"]
+    collection_order = db["Order"]
 except errors.ConnectionError as e:
     print(f"Error connecting to MongoDB: {e}")

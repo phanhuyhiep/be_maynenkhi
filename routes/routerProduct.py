@@ -48,7 +48,7 @@ async def create_product(
             image_urls.append(image_url)
         product = {
             "name": name,
-            "images": image_urls,  # Cập nhật với danh sách URL hình ảnh
+            "images": image_urls,
             "price": price,
             "quantity": quantity,
             "description": description,
@@ -81,12 +81,9 @@ async def edit_product(
 ):
     try:
         product_id_obj = ObjectId(product_id)
-
-        # Tìm sản phẩm cũ
         existing_product = collection_product.find_one({"_id": product_id_obj})
         if not existing_product:
             raise HTTPException(status_code=404, detail=f"Product with ID {product_id} not found")
-
         # Xử lý hình ảnh nếu có
         image_urls = []
         if images:
@@ -97,7 +94,6 @@ async def edit_product(
                 if not image_url:
                     raise HTTPException(status_code=500, detail="Image upload failed, secure_url not found")
                 image_urls.append(image_url)
-
         # Cập nhật thông tin sản phẩm
         updated_product = {
             "name": name if name is not None else existing_product.get("name"),
@@ -113,13 +109,10 @@ async def edit_product(
         updated_product_data = collection_product.find_one({"_id": product_id_obj})
         if updated_product_data is None:
             raise HTTPException(status_code=404, detail=f"Product with ID {product_id} not found after update")
-
         # Chuyển đổi ObjectId thành chuỗi
         updated_product_data["_id"] = str(updated_product_data["_id"])
-
         # Trả về sản phẩm đã cập nhật
         return jsonable_encoder(updated_product_data)
-
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to update product: {str(e)}")
 @router_product.delete("/product/delete/{id}")
