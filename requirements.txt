@@ -7,3 +7,4 @@ uvicorn==0.29.0
 cloudinary
 passlib[bcrypt]  # Nếu bạn sử dụng bcrypt để băm mật khẩu
 python-jose  # Nếu bạn sử dụng jose để mã hóa JWT
+python-multipart
