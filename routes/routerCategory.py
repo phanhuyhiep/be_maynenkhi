@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 from bson import ObjectId
 from models.categoryModel import Category
 from config.database import collection_category
@@ -7,9 +7,20 @@ from schema.categorySchema import list_category, category_serial
 router_category = APIRouter()
 
 @router_category.get("/category/")
-async def get_category():
-    category = list_category(collection_category.find())
-    return category
+async def get_category(page: int = Query(1, ge=1), limit: int = Query(10, ge=1)):
+    skip = (page - 1) * limit
+    total_items = collection_category.count_documents({})
+    categories = list_category(
+        collection_category.find().skip(skip).limit(limit)
+    )
+    total_pages = (total_items + limit - 1) // limit
+    return{
+        "categories": categories, 
+        "current_page": page,
+        "total_items": total_items,
+        "total_pages": total_pages,
+        "limit_pages": limit,
+    }
 
 @router_category.get("/category/{id}")
 async def get_one_category(id:str):

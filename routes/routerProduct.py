@@ -1,6 +1,6 @@
 import cloudinary.uploader
 import cloudinary
-from fastapi import APIRouter, File,UploadFile, HTTPException,Form, Path
+from fastapi import APIRouter, File,UploadFile, HTTPException,Form, Path, Query
 from bson import ObjectId
 from typing import Optional, List
 from models.productModel import Product
@@ -60,9 +60,20 @@ async def create_product(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to upload images: {str(e)}")
 @router_product.get("/product/")
-async def get_all_product():
-    products = list_product(collection_product.find())
-    return products
+async def get_all_product(page: int = Query(1, ge=1), limit: int = Query(10, ge=1)):
+    skip = (page - 1) * limit
+    total_items = collection_product.count_documents({})
+    products = list_product(
+        collection_product.find().skip(skip).limit(limit)
+    )
+    total_pages = (total_items + limit - 1) // limit
+    return {
+        "products": products,
+        "current_page": page,
+        "total_items": total_items,
+        "total_pages": total_pages,
+        "limit_pages": limit,
+    }
     
 @router_product.get("/product/{id}")
 async def get_one_product(id: str):

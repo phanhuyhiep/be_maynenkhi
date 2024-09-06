@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 from bson import ObjectId
 from models.authModel import Auth
 from config.database import collection_auth
@@ -61,10 +61,20 @@ def create_access_token(auth_id: str):
     return access_token
 
 @router_auth.get("/auth/")
-async def get_auth():
-    auth = list_auth(collection_auth.find())
-    return auth 
-
+async def get_auth(page: int = Query(1, ge=1), limit: int = Query(10, ge=1)):
+    skip = (page - 1) * limit
+    total_items = collection_auth.count_documents({})
+    auths = list_auth(
+        collection_auth.find().skip(skip).limit(limit)
+    )
+    total_pages = (total_items + limit - 1) // limit
+    return {
+        "auths": auths,
+        "current_page": page,
+        "total_items": total_items,
+        "total_pages": total_pages,
+        "limit_pages": limit,
+    }
 @router_auth.get("/auth/{id}")
 async def get_one_auth( id: str):
     auth = collection_auth.find_one({"_id": ObjectId(id)})

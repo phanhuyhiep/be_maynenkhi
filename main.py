@@ -19,10 +19,10 @@ allow_origins=["*"]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allow_origins,  # Cho phép các nguồn gốc cụ thể
+    allow_origins=allow_origins,
     allow_credentials=True,
-    allow_methods=["*"],  # Cho phép tất cả các phương thức HTTP
-    allow_headers=["*"],  # Cho phép tất cả các headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
