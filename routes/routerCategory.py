@@ -33,7 +33,7 @@ async def create_category(category: Category = Depends(Category.as_form)):
     return "add category successfully"
     
 @router_category.put("/category/edit/{id}")
-async def edit_category(id:str, category: Category):
+async def edit_category(id:str, category: Category  = Depends(Category.as_form)):
     collection_category.find_one_and_update({"_id": ObjectId(id)}, {"$set": dict(category)})
     return "edit category successfully"
     

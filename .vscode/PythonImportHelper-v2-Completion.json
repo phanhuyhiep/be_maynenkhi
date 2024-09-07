@@ -251,15 +251,7 @@
         "documentation": {}
     },
     {
-        "label": "Depends",
-        "importPath": "fastapi",
-        "description": "fastapi",
-        "isExtraImport": true,
-        "detail": "fastapi",
-        "documentation": {}
-    },
-    {
-        "label": "APIRouter",
+        "label": "Query",
         "importPath": "fastapi",
         "description": "fastapi",
         "isExtraImport": true,
@@ -300,6 +292,38 @@
     },
     {
         "label": "Depends",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Query",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Depends",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Query",
         "importPath": "fastapi",
         "description": "fastapi",
         "isExtraImport": true,
@@ -348,6 +372,14 @@
     },
     {
         "label": "Path",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Query",
         "importPath": "fastapi",
         "description": "fastapi",
         "isExtraImport": true,
@@ -851,7 +883,7 @@
         "kind": 5,
         "importPath": "routes.routerCategory",
         "description": "routes.routerCategory",
-        "peekOfCode": "router_category = APIRouter()\n@router_category.get(\"/category/\")\nasync def get_category():\n    category = list_category(collection_category.find())\n    return category\n@router_category.get(\"/category/{id}\")\nasync def get_one_category(id:str):\n    category = category_serial(collection_category.find_one({\"_id\": ObjectId(id)}))\n    return category\n@router_category.post(\"/category/add\")",
+        "peekOfCode": "router_category = APIRouter()\n@router_category.get(\"/category/\")\nasync def get_category(page: int = Query(1, ge=1), limit: int = Query(10, ge=1)):\n    skip = (page - 1) * limit\n    total_items = collection_category.count_documents({})\n    categories = list_category(\n        collection_category.find().skip(skip).limit(limit)\n    )\n    total_pages = (total_items + limit - 1) // limit\n    return{",
         "detail": "routes.routerCategory",
         "documentation": {}
     },
@@ -860,7 +892,7 @@
         "kind": 5,
         "importPath": "routes.routerOrder",
         "description": "routes.routerOrder",
-        "peekOfCode": "router_order = APIRouter()\n@router_order.get(\"/order/\")\nasync def get_all_order():\n    orders = list_order(collection_order.find())\n    return orders\n@router_order.post(\"/order/add\")\nasync def create_order(order:Order = Depends(Order.as_form)):\n    collection_order.insert_one(dict(order))\n    return \"Message: OK\"\n@router_order.put(\"/order/edit/{id_order}\")",
+        "peekOfCode": "router_order = APIRouter()\n@router_order.get(\"/order/\")\nasync def get_all_order(page: int = Query(1, ge=1), limit: int = Query(10, ge=1)):\n    skip = (page - 1) * limit\n    total_items = collection_order.count_documents({})\n    orders = list_order(\n        collection_order.find().skip(skip).limit(limit)\n    )\n    total_pages = (total_items + limit - 1) // limit\n    return {",
         "detail": "routes.routerOrder",
         "documentation": {}
     },
