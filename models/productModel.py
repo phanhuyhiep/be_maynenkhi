@@ -6,6 +6,6 @@ class Product(BaseModel):
     price: float = Form(...),
     quantity: int = Form(...),
     description: str = Form(...),
-    categoryId: Optional[str] = Form(None),
+    categoryName: Optional[str] = Form(None),
     images: List[UploadFile] = File(...)
 

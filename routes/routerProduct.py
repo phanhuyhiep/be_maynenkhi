@@ -30,17 +30,19 @@ async def create_product(
     price: float = Form(...),
     quantity: int = Form(...),
     description: str = Form(...),
-    categoryId: Optional[str] = Form(None),
+    categoryName: Optional[str] = Form(None),
     images: List[UploadFile] = File(...)
-):
+    ):
     try:
         image_urls = []
         # Xử lý từng hình ảnh
         for image in images:
             # Đọc nội dung hình ảnh
             image_content = await image.read()
+            # print(image_content)
             # Tải lên Cloudinary và lấy URL
             upload_result = cloudinary.uploader.upload(image_content)
+            # print(upload_result)
             # Lấy URL hình ảnh từ kết quả trả về
             image_url = upload_result.get('secure_url')
             if not image_url:
@@ -52,19 +54,35 @@ async def create_product(
             "price": price,
             "quantity": quantity,
             "description": description,
-            "categoryId": categoryId
+            "categoryName": categoryName
         }
         result = collection_product.insert_one(product)
         created_product = collection_product.find_one({"_id": result.inserted_id})
         return product_serial(created_product)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to upload images: {str(e)}")
+from typing import Optional
+from fastapi import APIRouter, Query
+
 @router_product.get("/product/")
-async def get_all_product(page: int = Query(1, ge=1), limit: int = Query(10, ge=1)):
+async def get_all_product(
+    page: int = Query(1, ge=1), 
+    limit: int = Query(10, ge=1), 
+    categoryName: Optional[str] = Query(None),  # Danh mục là tùy chọn
+    productName: Optional[str] = Query(None)    # Tìm kiếm theo tên sản phẩm là tùy chọn
+    ):
     skip = (page - 1) * limit
-    total_items = collection_product.count_documents({})
+    # Tạo filter cơ bản
+    filter_query = {}
+    # Thêm điều kiện tìm kiếm theo danh mục nếu có
+    if categoryName:
+        filter_query["categoryName"] = categoryName
+    # Thêm điều kiện tìm kiếm theo tên sản phẩm nếu có
+    if productName:
+        filter_query["name"] = {"$regex": productName, "$options": "i"}  # Tìm kiếm không phân biệt hoa/thường
+    total_items = collection_product.count_documents(filter_query)
     products = list_product(
-        collection_product.find().skip(skip).limit(limit)
+        collection_product.find(filter_query).skip(skip).limit(limit)
     )
     total_pages = (total_items + limit - 1) // limit
     return {
@@ -74,7 +92,7 @@ async def get_all_product(page: int = Query(1, ge=1), limit: int = Query(10, ge=
         "total_pages": total_pages,
         "limit_pages": limit,
     }
-    
+
 @router_product.get("/product/{id}")
 async def get_one_product(id: str):
     product = collection_product.find_one({"_id": ObjectId(id)})
@@ -87,9 +105,9 @@ async def edit_product(
     price: Optional[float] = Form(None),
     quantity: Optional[int] = Form(None),
     description: Optional[str] = Form(None),
-    categoryId: Optional[str] = Form(None),
+    categoryName: Optional[str] = Form(None),
     images: Optional[List[UploadFile]] = File(None)
-):
+    ):
     try:
         product_id_obj = ObjectId(product_id)
         existing_product = collection_product.find_one({"_id": product_id_obj})
@@ -111,7 +129,7 @@ async def edit_product(
             "price": price if price is not None else existing_product.get("price"),
             "quantity": quantity if quantity is not None else existing_product.get("quantity"),
             "description": description if description is not None else existing_product.get("description"),
-            "categoryId": categoryId if categoryId is not None else existing_product.get("categoryId"),
+            "categoryName": categoryName if categoryName is not None else existing_product.get("categoryName"),
             "images": image_urls if image_urls else existing_product.get("images"),
         }
         # Cập nhật sản phẩm trong cơ sở dữ liệu

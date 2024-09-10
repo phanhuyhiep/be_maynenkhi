@@ -6,7 +6,7 @@ def product_serial(product) -> dict:
         "price": product.get("price", "N/A"),
         "quantity": product.get("quantity", "N/A"),
         "description": product.get("description", "N/A"),
-        "categoryId": product.get("categoryId", "N/A")
+        "categoryName": product.get("categoryName", "N/A")
     }
 def list_product(products) -> list:
     return [product_serial(product) for product in products]

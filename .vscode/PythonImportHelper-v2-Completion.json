@@ -170,6 +170,14 @@
         "documentation": {}
     },
     {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
         "label": "secrets",
         "kind": 6,
         "isExtraImport": true,
@@ -372,6 +380,22 @@
     },
     {
         "label": "Path",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Query",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "APIRouter",
         "importPath": "fastapi",
         "description": "fastapi",
         "isExtraImport": true,
@@ -838,7 +862,7 @@
         "kind": 6,
         "importPath": "models.productModel",
         "description": "models.productModel",
-        "peekOfCode": "class Product(BaseModel):\n    name: str = Form(...),\n    price: float = Form(...),\n    quantity: int = Form(...),\n    description: str = Form(...),\n    categoryId: Optional[str] = Form(None),\n    images: List[UploadFile] = File(...)",
+        "peekOfCode": "class Product(BaseModel):\n    name: str = Form(...),\n    price: float = Form(...),\n    quantity: int = Form(...),\n    description: str = Form(...),\n    categoryName: Optional[str] = Form(None),\n    images: List[UploadFile] = File(...)",
         "detail": "models.productModel",
         "documentation": {}
     },
@@ -1009,7 +1033,7 @@
         "kind": 2,
         "importPath": "schema.productSchema",
         "description": "schema.productSchema",
-        "peekOfCode": "def product_serial(product) -> dict:\n    return {\n        \"id\": str(product.get(\"_id\", \"N/A\")),\n        \"name\": product.get(\"name\", \"N/A\"),\n        \"images\": product.get(\"images\", [\"N/A\"]),\n        \"price\": product.get(\"price\", \"N/A\"),\n        \"quantity\": product.get(\"quantity\", \"N/A\"),\n        \"description\": product.get(\"description\", \"N/A\"),\n        \"categoryId\": product.get(\"categoryId\", \"N/A\")\n    }",
+        "peekOfCode": "def product_serial(product) -> dict:\n    return {\n        \"id\": str(product.get(\"_id\", \"N/A\")),\n        \"name\": product.get(\"name\", \"N/A\"),\n        \"images\": product.get(\"images\", [\"N/A\"]),\n        \"price\": product.get(\"price\", \"N/A\"),\n        \"quantity\": product.get(\"quantity\", \"N/A\"),\n        \"description\": product.get(\"description\", \"N/A\"),\n        \"categoryName\": product.get(\"categoryName\", \"N/A\")\n    }",
         "detail": "schema.productSchema",
         "documentation": {}
     },
