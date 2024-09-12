@@ -339,6 +339,14 @@
         "documentation": {}
     },
     {
+        "label": "Query",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
         "label": "APIRouter",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -916,7 +924,7 @@
         "kind": 5,
         "importPath": "routes.routerOrder",
         "description": "routes.routerOrder",
-        "peekOfCode": "router_order = APIRouter()\n@router_order.get(\"/order/\")\nasync def get_all_order(page: int = Query(1, ge=1), limit: int = Query(10, ge=1)):\n    skip = (page - 1) * limit\n    total_items = collection_order.count_documents({})\n    orders = list_order(\n        collection_order.find().skip(skip).limit(limit)\n    )\n    total_pages = (total_items + limit - 1) // limit\n    return {",
+        "peekOfCode": "router_order = APIRouter()\nfrom fastapi import Query\n@router_order.get(\"/order/\")\nasync def get_all_order(\n    page: int = Query(1, ge=1),\n    limit: int = Query(10, ge=1),\n    order_status: str = Query(None),\n    phone_number: str = Query(None)\n):\n    skip = (page - 1) * limit",
         "detail": "routes.routerOrder",
         "documentation": {}
     },

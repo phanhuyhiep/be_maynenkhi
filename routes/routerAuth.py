@@ -61,11 +61,19 @@ def create_access_token(auth_id: str):
     return access_token
 
 @router_auth.get("/auth/")
-async def get_auth(page: int = Query(1, ge=1), limit: int = Query(10, ge=1)):
+async def get_auth(
+    page: int = Query(1, ge=1),
+    limit: int = Query(10, ge=1),
+    email: str = Query(None)  # email là tùy chọn, có thể không nhập
+    ):
     skip = (page - 1) * limit
-    total_items = collection_auth.count_documents({})
+    # Điều kiện tìm kiếm theo email nếu có
+    query_filter = {}
+    if email:
+        query_filter["email"] = {"$regex": email, "$options": "i"}  # Tìm kiếm không phân biệt hoa thường
+    total_items = collection_auth.count_documents(query_filter)
     auths = list_auth(
-        collection_auth.find().skip(skip).limit(limit)
+        collection_auth.find(query_filter).skip(skip).limit(limit)
     )
     total_pages = (total_items + limit - 1) // limit
     return {
