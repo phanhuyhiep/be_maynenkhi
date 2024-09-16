@@ -6,14 +6,15 @@
 pip install virtualenv 
 ```
 
-```bash
 # tạo môi trường ảo với name myenv
-python3 -m venv myenv
 
+```bash
+python -m venv myenv
 ```
 
-```bash
 # start môi trường ảo myenv
+
+```bash
 myenv\Scripts\activate
 ```
 
