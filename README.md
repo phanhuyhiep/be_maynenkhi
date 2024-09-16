@@ -6,25 +6,25 @@
 pip install virtualenv 
 ```
 
-# tạo môi trường ảo với name myenv
+2. **tạo môi trường ảo với name myenv**:
 
 ```bash
 python -m venv myenv
 ```
 
-# start môi trường ảo myenv
+3. **start môi trường ảo myenv**:
 
 ```bash
 myenv\Scripts\activate
 ```
 
-2. **Cài đặt các phụ thuộc**:
+4. **Cài đặt các phụ thuộc**:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. **Chạy ứng dụng**:
+5. **Chạy ứng dụng**:
 
 ```bash
 python main.py
