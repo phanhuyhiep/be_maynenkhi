@@ -1,8 +1,13 @@
-﻿#hiepph
+# Hướng Dẫn Cài Đặt và Chạy Backend FastAPI
 
-pip install fastapi
-<b>
-pip install uvicorn
+1. **Cài đặt các phụ thuộc**:
 
-Run: uvicorn main:app --reload
+   ```bash
+   pip install -r requirements.txt
+   ```
+2. **Chạy ứng dụng**:
+
+  ```bash
+  python main.py
+  ```
 
