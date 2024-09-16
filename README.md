@@ -2,12 +2,12 @@
 
 1. **Cài đặt các phụ thuộc**:
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+```bash
+pip install -r requirements.txt
+```
 2. **Chạy ứng dụng**:
 
-  ```bash
-  python main.py
-  ```
+```bash
+python main.py
+```
 
