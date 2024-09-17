@@ -3,10 +3,11 @@ from fastapi import APIRouter, Depends, Query
 from models.orderModel import Order
 from schema.orderSchema import list_order
 from config.database import collection_order
+from fastapi import Query
+from fastapi import APIRouter, Query
+from pymongo import DESCENDING
 
 router_order = APIRouter()
-
-from fastapi import Query
 
 @router_order.get("/order/")
 async def get_all_order(
@@ -15,20 +16,28 @@ async def get_all_order(
     order_status: str = Query(None),
     phone_number: str = Query(None)
 ):
+    # Tính số lượng tài liệu cần bỏ qua để phân trang
     skip = (page - 1) * limit
+    # Khởi tạo từ điển truy vấn
     query = {}
-    
-    # Thêm điều kiện lọc vào truy vấn nếu các tham số có giá trị
-    if order_status is not None:
+    # Chỉ thêm điều kiện lọc nếu các tham số được cung cấp và không trống
+    if order_status not in (None, ''):
         query["orderStatus"] = order_status
-    
-    if phone_number is not None:
+
+    if phone_number not in (None, ''):
         query["phoneNumber"] = phone_number
-    
+    # Lấy tổng số tài liệu phù hợp với truy vấn
     total_items = collection_order.count_documents(query)
+    
+    # Tìm nạp đơn hàng bằng cách phân trang
     orders = list_order(
-        collection_order.find(query).skip(skip).limit(limit)
+        collection_order.find(query)
+                        .skip(skip)
+                        .limit(limit)
+                        .sort([("_id", DESCENDING)])  # Tùy chọn: sắp xếp theo thứ tự giảm dần của `_id`
     )
+
+    # Tính tổng số trang
     total_pages = (total_items + limit - 1) // limit
     
     return {
@@ -36,8 +45,9 @@ async def get_all_order(
         "current_page": page,
         "total_items": total_items,
         "total_pages": total_pages,
-        "limit_pages": limit,
+        "limit": limit,
     }
+
 
 @router_order.post("/order/add")
 async def create_order(order:Order = Depends(Order.as_form)):
