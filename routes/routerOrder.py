@@ -10,11 +10,13 @@ import string
 
 router_order = APIRouter()
 
-from fastapi import Query
 
 def generate_random_code(length: int = 7) -> str:
     characters = string.ascii_lowercase + string.digits
     return ''.join(random.choice(characters) for _ in range(length))
+from pymongo import DESCENDING
+
+router_order = APIRouter()
 @router_order.get("/order/")
 async def get_all_order(
     page: int = Query(1, ge=1),
@@ -22,7 +24,9 @@ async def get_all_order(
     order_status: Optional[str] = Query(None),
     searchTerm: Optional[str] = Query(None)
 ):
+    # Tính số lượng tài liệu cần bỏ qua để phân trang
     skip = (page - 1) * limit
+    # Khởi tạo từ điển truy vấn
     query = {}
     if order_status:
         query["orderStatus"] = order_status
@@ -31,10 +35,18 @@ async def get_all_order(
             {"phoneNumber": searchTerm},
             {"orderCode": searchTerm}
         ]
+
     total_items = collection_order.count_documents(query)
+    
+    # Tìm nạp đơn hàng bằng cách phân trang
     orders = list_order(
-        collection_order.find(query).skip(skip).limit(limit)
+        collection_order.find(query)
+                        .skip(skip)
+                        .limit(limit)
+                        .sort([("_id", DESCENDING)])  # Tùy chọn: sắp xếp theo thứ tự giảm dần của `_id`
     )
+
+    # Tính tổng số trang
     total_pages = (total_items + limit - 1) // limit
     
     return {
@@ -42,7 +54,7 @@ async def get_all_order(
         "current_page": page,
         "total_items": total_items,
         "total_pages": total_pages,
-        "limit_pages": limit,
+        "limit": limit,
     }
 
 @router_order.get("/order/{order_id}")

@@ -157,7 +157,31 @@ async def edit_product(
         return jsonable_encoder(updated_product_data)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to update product: {str(e)}")
+from bson import ObjectId
+from fastapi import HTTPException
+
 @router_product.delete("/product/delete/{id}")
-async def delete_product(id:str):
-    collection_product.find_one_and_delete({"_id": ObjectId(id)})
-    return "delete successfully"
+async def delete_product(id: str):
+    try:
+        # Find the product by its ID
+        product = collection_product.find_one({"_id": ObjectId(id)})
+        if not product:
+            raise HTTPException(status_code=404, detail="Product not found")
+
+        # Retrieve the image URLs
+        image_urls = product.get('images', [])
+
+        # Delete each image from Cloudinary
+        for image_url in image_urls:
+            # Extract the public ID of the image from the URL
+            public_id = image_url.split('/')[-1].split('.')[0]
+            # Call Cloudinary API to delete the image
+            cloudinary.uploader.destroy(public_id)
+
+        # Delete the product from the database
+        collection_product.find_one_and_delete({"_id": ObjectId(id)})
+
+        return {"message": "Product and associated images deleted successfully"}
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to delete product or images: {str(e)}")
