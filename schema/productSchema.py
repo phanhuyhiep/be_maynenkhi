@@ -1,6 +1,7 @@
 def product_serial(product) -> dict:
     return {
         "id": str(product.get("_id", "N/A")),
+        "productCode": product.get("productCode", "N/A"),
         "name": product.get("name", "N/A"),
         "images": product.get("images", ["N/A"]),
         "price": product.get("price", "N/A"),

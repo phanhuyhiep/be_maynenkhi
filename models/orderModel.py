@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field
 from datetime import datetime
 
 class Order(BaseModel):
+    orderCode: str
     fullName: str
     phoneNumber: str
     city: str
@@ -14,7 +15,7 @@ class Order(BaseModel):
     productName: str
     productPrice: float
     productQuantity: float
-    payment_methods: Literal[
+    paymentMethods: Literal[
         'Customers come to pick up at the store', #Khách hàng đến lấy tại cửa hàng
         'Free shipping only applies to Hanoi', #Miến phí vận chuyển tại khu vực Hà Nội
     ] = 'Free shipping only applies to Hanoi'  
@@ -39,7 +40,7 @@ class Order(BaseModel):
         productName: str = Form(...),
         productPrice: float = Form(...),
         productQuantity: float = Form(...),
-        payment_methods: Literal[
+        paymentMethods: Literal[
             'Customers come to pick up at the store',
             'Free shipping only applies to Hanoi'
         ] = Form('Free shipping only applies to Hanoi'),
@@ -54,6 +55,7 @@ class Order(BaseModel):
     ) -> 'Order':
         total = productQuantity * productPrice
         return cls(
+            orderCode = "",
             fullName=fullName,
             phoneNumber=phoneNumber,
             city=city,
@@ -65,6 +67,6 @@ class Order(BaseModel):
             productPrice=productPrice,
             productQuantity=productQuantity,
             editBy=editBy,
-            payment_methods = payment_methods,
+            paymentMethods = paymentMethods,
             orderStatus=orderStatus
         )

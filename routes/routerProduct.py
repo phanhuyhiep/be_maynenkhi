@@ -9,6 +9,10 @@ from schema.productSchema import list_product, product_serial
 import os
 from dotenv import load_dotenv
 from fastapi.encoders import jsonable_encoder
+from typing import Optional
+from fastapi import APIRouter, Query
+import random
+import string
 
 load_dotenv()
 
@@ -23,7 +27,9 @@ cloudinary.config(
     api_key = API_KEY,
     api_secret= API_SECRET
 )
-
+def generate_random_code(length: int = 7) -> str:
+    characters = string.ascii_lowercase + string.digits
+    return ''.join(random.choice(characters) for _ in range(length))
 @router_product.post("/product/add")
 async def create_product(
     name: str = Form(...),
@@ -34,6 +40,7 @@ async def create_product(
     images: List[UploadFile] = File(...)
     ):
     try:
+        productCode = generate_random_code()
         image_urls = []
         # Xử lý từng hình ảnh
         for image in images:
@@ -49,6 +56,7 @@ async def create_product(
                 raise HTTPException(status_code=500, detail="Image upload failed, secure_url not found")
             image_urls.append(image_url)
         product = {
+            "productCode": productCode,
             "name": name,
             "images": image_urls,
             "price": price,
@@ -61,29 +69,35 @@ async def create_product(
         return product_serial(created_product)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to upload images: {str(e)}")
-from typing import Optional
-from fastapi import APIRouter, Query
-
+    
 @router_product.get("/product/")
 async def get_all_product(
     page: int = Query(1, ge=1), 
     limit: int = Query(10, ge=1), 
     categoryName: Optional[str] = Query(None),  # Danh mục là tùy chọn
-    productName: Optional[str] = Query(None)    # Tìm kiếm theo tên sản phẩm là tùy chọn
-    ):
+    searchTerm: Optional[str] = Query(None)      # Tìm kiếm theo tên sản phẩm hoặc mã sản phẩm
+):
     skip = (page - 1) * limit
+    
     # Tạo filter cơ bản
     filter_query = {}
+    
     # Thêm điều kiện tìm kiếm theo danh mục nếu có
     if categoryName:
         filter_query["categoryName"] = categoryName
-    # Thêm điều kiện tìm kiếm theo tên sản phẩm nếu có
-    if productName:
-        filter_query["name"] = {"$regex": productName, "$options": "i"}  # Tìm kiếm không phân biệt hoa/thường
+        
+    # Thêm điều kiện tìm kiếm theo tên sản phẩm hoặc mã sản phẩm nếu có
+    if searchTerm:
+        filter_query["$or"] = [
+            {"name": {"$regex": searchTerm, "$options": "i"}},  # Tìm kiếm theo tên sản phẩm
+            {"productCode": searchTerm}                           # Tìm kiếm chính xác theo mã sản phẩm
+        ]
+
     total_items = collection_product.count_documents(filter_query)
     products = list_product(
         collection_product.find(filter_query).skip(skip).limit(limit)
     )
+    
     total_pages = (total_items + limit - 1) // limit
     return {
         "products": products,
@@ -92,7 +106,6 @@ async def get_all_product(
         "total_pages": total_pages,
         "limit_pages": limit,
     }
-
 @router_product.get("/product/{id}")
 async def get_one_product(id: str):
     product = collection_product.find_one({"_id": ObjectId(id)})

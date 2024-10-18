@@ -1,0 +1,37 @@
+# Ignore Python compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore virtual environments
+venv/
+env/
+myenv/
+*.env
+
+# Ignore IDE/editor specific files
+.vscode/
+.idea/
+*.swp
+
+# Ignore log files
+*.log
+
+# Ignore MacOS specific files
+.DS_Store
+
+# Ignore system files
+Thumbs.db
+
+# Ignore database files
+*.sqlite3
+*.db
+
+# Ignore specific deployment tools (like Docker, etc.)
+docker-compose.override.yml
+
+# Ignore FastAPI specific temporary files
+instance/
+build/
+dist/
