@@ -38,7 +38,6 @@ async def register(auth:Auth = Depends(Auth.as_form)):
 
 #login
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
-
 @router_auth.post("/auth/login")
 async def login(auth:Auth = Depends(Auth.as_form)):
     check_user = collection_auth.find_one({"email": auth.email})
@@ -84,10 +83,16 @@ async def get_auth(
         "limit_pages": limit,
     }
 @router_auth.get("/auth/{id}")
-async def get_one_auth( id: str):
+async def get_one_auth(id: str):
     auth = collection_auth.find_one({"_id": ObjectId(id)})
-    return auth_seriral(auth)
-
+    
+    if not auth:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    return {
+        "email": auth.get("email"),
+        "name": auth.get("name")
+    }
 @router_auth.put("/auth/edit/{id}")
 async def edit_auth(id: str, auth: Auth = Depends(Auth.as_form)):
     # Find the existing user
@@ -120,6 +125,7 @@ async def edit_auth(id: str, auth: Auth = Depends(Auth.as_form)):
 async def delete_auth(id:str):
     collection_auth.find_one_and_delete({"_id": ObjectId(id)})
     return {"message": "OK"} 
+
 # reset password
 @router_auth.post("/auth/forgot_password")
 async def forgot_password(email:str):
@@ -145,5 +151,5 @@ async def forgot_password(email:str):
             server.login(sender_email, password)
             server.sendmail(sender_email, receiver_email, message.as_string())
         return {"message": "OK"}
-    else: 
+    else:
         return {"message": "Email không tồn tại trọng hệ thống" }
