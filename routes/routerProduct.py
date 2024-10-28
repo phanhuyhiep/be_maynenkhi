@@ -74,30 +74,22 @@ async def create_product(
 async def get_all_product(
     page: int = Query(1, ge=1), 
     limit: int = Query(10, ge=1), 
-    categoryName: Optional[str] = Query(None),  # Danh mục là tùy chọn
-    searchTerm: Optional[str] = Query(None)      # Tìm kiếm theo tên sản phẩm hoặc mã sản phẩm
+    categoryName: Optional[str] = Query(None),
+    searchTerm: Optional[str] = Query(None)
 ):
     skip = (page - 1) * limit
-    
-    # Tạo filter cơ bản
     filter_query = {}
-    
-    # Thêm điều kiện tìm kiếm theo danh mục nếu có
     if categoryName:
         filter_query["categoryName"] = categoryName
-        
-    # Thêm điều kiện tìm kiếm theo tên sản phẩm hoặc mã sản phẩm nếu có
     if searchTerm:
         filter_query["$or"] = [
-            {"name": {"$regex": searchTerm, "$options": "i"}},  # Tìm kiếm theo tên sản phẩm
-            {"productCode": searchTerm}                           # Tìm kiếm chính xác theo mã sản phẩm
+            {"name": {"$regex": searchTerm, "$options": "i"}}, 
+            {"productCode": searchTerm}
         ]
-
     total_items = collection_product.count_documents(filter_query)
     products = list_product(
         collection_product.find(filter_query).skip(skip).limit(limit)
     )
-    
     total_pages = (total_items + limit - 1) // limit
     return {
         "products": products,
@@ -111,7 +103,17 @@ async def get_one_product(id: str):
     product = collection_product.find_one({"_id": ObjectId(id)})
     return product_serial(product)
 
+@router_product.get("/product/code/{productCode}")
+async def get_one_product_by_code(productCode: str):
+    product = collection_product.find_one({"productCode": productCode})
+    
+    if not product:
+        raise HTTPException(status_code=404, detail="Product not found")
+    
+    return product_serial(product)
+
 @router_product.put("/product/edit/{product_id}")
+
 async def edit_product(
     product_id: str = Path(..., description="ID của sản phẩm cần chỉnh sửa"),
     name: Optional[str] = Form(None),
