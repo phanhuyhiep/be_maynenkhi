@@ -10,6 +10,7 @@ def order_serial(order) -> dict:
         "detailAddress": str(order["detailAddress"]),
         "total": float(order["total"]),
         "productName": str(order["productName"]),
+        "productCode":str(order["productCode"]),
         "productPrice": float(order["productPrice"]),
         "productQuantity": float(order["productQuantity"]),
         "paymentMethods":str(order["paymentMethods"]),
