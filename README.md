@@ -30,3 +30,11 @@ pip install -r requirements.txt
 python main.py
 ```
 
+6. **Biến môi trường**:
+
+| Tên biến môi trường      | Giá trị               | Mô tả                               |
+| ------------------------ | --------------------- | ----------------------------------- |
+| BASE_URL    | mongodb://localhost:27017/ | Url mongodb                     |
+| CLOUD_NAME | __________| cloud name cloudinary |
+| API_KEY | hhdffgfh | API key cloudinary |
+| API_SECRET | hhdheher | API SECRET cloudinary |
