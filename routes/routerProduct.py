@@ -169,20 +169,16 @@ async def delete_product(id: str):
         product = collection_product.find_one({"_id": ObjectId(id)})
         if not product:
             raise HTTPException(status_code=404, detail="Product not found")
-
         # Retrieve the image URLs
         image_urls = product.get('images', [])
-
         # Delete each image from Cloudinary
         for image_url in image_urls:
             # Extract the public ID of the image from the URL
             public_id = image_url.split('/')[-1].split('.')[0]
             # Call Cloudinary API to delete the image
             cloudinary.uploader.destroy(public_id)
-
         # Delete the product from the database
         collection_product.find_one_and_delete({"_id": ObjectId(id)})
-
         return {"message": "Product and associated images deleted successfully"}
     
     except Exception as e:
