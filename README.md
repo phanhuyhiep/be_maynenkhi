@@ -34,6 +34,7 @@ python main.py
 
 | Tên biến môi trường      | Giá trị               | Mô tả                               |
 | ------------------------ | --------------------- | ----------------------------------- |
+| PORT        | 6879 | port mà ứng dụng chạy |
 | BASE_URL    | mongodb://localhost:27017/ | Url mongodb                     |
 | CLOUD_NAME | __________| cloud name cloudinary |
 | API_KEY | hhdffgfh | API key cloudinary |

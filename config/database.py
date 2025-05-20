@@ -6,11 +6,11 @@ mongoUrl = os.environ.get('BASE_URL')
 try:
     client = MongoClient(mongoUrl, tlsCAFile=certifi.where())
     db = client.page_db
-    collection_category = db["Category"]
-    collection_product = db["Product"]
-    collection_auth = db["Auth"]
-    collection_cart = db["Cart"]
-    collection_order = db["Order"]
+    collection_category = db["categories"]
+    collection_product = db["products"]
+    collection_auth = db["auth"]
+    collection_cart = db["carts"]
+    collection_order = db["orders"]
 except errors.ConnectionError as e:
     print(f"Error connecting to MongoDB: {e}")
 except errors.ServerSelectionTimeoutError as e:

@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI
 from routes.routerOrder import router_order
 from routes.routerCategory import router_category
@@ -9,6 +10,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+port = os.environ.get('PORT')
+
 app.include_router(router_category)
 app.include_router(router_product)
 app.include_router(router_auth)
@@ -17,6 +20,7 @@ app.include_router(router_order)
 
 allow_origins=["*"]
 
+# Set up CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allow_origins,
@@ -30,4 +34,4 @@ async def root():
     return {"message": "Server is online. Hello world!"}
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=6879, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=True)

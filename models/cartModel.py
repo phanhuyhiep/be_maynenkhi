@@ -4,7 +4,7 @@ from pydantic import BaseModel
 class Cart(BaseModel):
     quantity: float
     productId: Optional[str] = Form(None),
-
+    
     @classmethod
     def as_form(
         cls,
