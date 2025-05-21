@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, Query
 from bson import ObjectId
 from models.categoryModel import Category
 from config.database import collection_category
-from models.common import paginate_response
+from models.common import message_response, paginate_response
 from schema.categorySchema import list_category, category_serial
 
 router_category = APIRouter()
@@ -25,15 +25,15 @@ async def get_one_category(id:str):
 @router_category.post("/category/add")
 async def create_category(category: Category = Depends(Category.as_form)):
     collection_category.insert_one(dict(category))
-    return "add category successfully"
+    return message_response("OK")
     
 @router_category.put("/category/edit/{id}")
 async def edit_category(id:str, category: Category  = Depends(Category.as_form)):
     collection_category.find_one_and_update({"_id": ObjectId(id)}, {"$set": dict(category)})
-    return "edit category successfully"
+    return message_response("OK")
     
 @router_category.delete("/category/delete/{id}")
 async def delete_category(id:str):
     collection_category.find_one_and_delete({"_id": ObjectId(id)})
-    return "delete category successfully"
+    return message_response("OK")
     

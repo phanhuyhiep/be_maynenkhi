@@ -5,7 +5,7 @@ import certifi
 mongoUrl = os.environ.get('BASE_URL')
 try:
     client = MongoClient(mongoUrl, tlsCAFile=certifi.where())
-    db = client.page_db
+    db = client.meta_db
     collection_category = db["categories"]
     collection_product = db["products"]
     collection_auth = db["auth"]
