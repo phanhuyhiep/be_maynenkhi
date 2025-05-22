@@ -38,6 +38,7 @@ async def create_product(
     quantity: int = Form(...),
     description: str = Form(...),
     categoryId: Optional[str] = Form(None),
+    categoryName: Optional[str] = Form(None),
     images: List[UploadFile] = File(...),
 ):
     try:
@@ -66,6 +67,7 @@ async def create_product(
             "quantity": quantity,
             "description": description,
             "categoryId": categoryId,
+            "categoryName": categoryName,
         }
         result = collection_product.insert_one(product)
         created_product = collection_product.find_one({"_id": result.inserted_id})
@@ -75,13 +77,22 @@ async def create_product(
             status_code=500, detail=f"Failed to upload images: {str(e)}"
         )
 
-@router_product.get("/product/")
-async def get_all_product(
+
+@router_product.get("/product/")    
+async def get_product(
     page: int = Query(1, ge=1),
     limit: int = Query(10, ge=1),
     categoryId: Optional[str] = Query(None),
     keyWord: Optional[str] = Query(None),
+    id: Optional[str] = Query(None),
 ):
+    if id:
+        product = collection_product.find_one({"_id": ObjectId(id)})
+        if not product:
+            raise HTTPException(status_code=404, detail="Product not found")
+        product["id"] = str(product["_id"])
+        del product["_id"]
+        return paginate_response(product, 1, 1, 1, 1)
     skip = (page - 1) * limit
     filter_query = {}
     if categoryId:
@@ -91,6 +102,7 @@ async def get_all_product(
             {"name": {"$regex": keyWord, "$options": "i"}},
             {"productCode": keyWord},
         ]
+
     total_items = collection_product.count_documents(filter_query)
     products = list_product(
         collection_product.find(filter_query).skip(skip).limit(limit)
@@ -98,14 +110,6 @@ async def get_all_product(
     total_pages = (total_items + limit - 1) // limit
     return paginate_response(products, page, total_items, limit, total_pages)
 
-@router_product.get("/product/{id}")
-async def get_one_product(id: str):
-    product = collection_product.find_one({"_id": ObjectId(id)})
-    if not product:
-        raise HTTPException(status_code=404, detail="Product not found")
-    product["id"] = str(product["_id"])
-    del product["_id"]
-    return paginate_response(product,1, 1, 1, 1)
 
 @router_product.get("/product/code/{productCode}")
 async def get_one_product_by_code(productCode: str):
@@ -116,6 +120,7 @@ async def get_one_product_by_code(productCode: str):
     del product["_id"]
     return paginate_response(product, 1, 1, 1, 1)
 
+
 @router_product.put("/product/edit/{product_id}")
 async def edit_product(
     product_id: str = Path(..., description="ID của sản phẩm cần chỉnh sửa"),
@@ -124,6 +129,7 @@ async def edit_product(
     quantity: Optional[int] = Form(None),
     description: Optional[str] = Form(None),
     categoryId: Optional[str] = Form(None),
+    categoryName: Optional[str] = Form(None),
     images: Optional[List[UploadFile]] = File(None),
 ):
     try:
@@ -158,10 +164,15 @@ async def edit_product(
                 if description is not None
                 else existing_product.get("description")
             ),
+            "categoryName": (
+                categoryName
+                if categoryName is not None
+                else existing_product.get("categoryName")
+            ),
             "categoryId": (
                 categoryId
                 if categoryId is not None
-                else existing_product.get("categoryName")
+                else existing_product.get("categoryId")
             ),
             "images": image_urls if image_urls else existing_product.get("images"),
         }
