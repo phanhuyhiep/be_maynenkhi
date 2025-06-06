@@ -111,8 +111,8 @@ async def get_product(
     return paginate_response(products, page, total_items, limit, total_pages)
 
 
-@router_product.get("/product/code/{productCode}")
-async def get_one_product_by_code(productCode: str):
+@router_product.get("/product/code")
+async def get_one_product_by_code(productCode: str = Query(..., description="Product code to look up")):
     product = collection_product.find_one({"productCode": productCode})
     if not product:
         raise HTTPException(status_code=404, detail="Product not found")
